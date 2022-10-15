@@ -11,11 +11,11 @@ class Userinfo(commands.Cog):
     @app_commands.command(name="userinfo", description="指定したユーザーの情報を返します。")
     async def userinfo(self, i, user: discord.User) -> None:
         try:
-            if user.bot == True:
+            if user.bot is True:
                 b = "はい"
             else:
                 b = "いいえ"
-            if user.system == True:
+            if user.system is True:
                 c = "はい"
             else:
                 c = "いいえ"
@@ -30,7 +30,8 @@ class Userinfo(commands.Cog):
                     color=discord.Colour.blurple(),
                 )
                 eee.add_field(name="ニックネーム", value=mg.nick)
-                eee.add_field(name="参加日時", value=discord.utils.format_dt(mg.joined_at))
+                eee.add_field(
+                    name="参加日時", value=discord.utils.format_dt(mg.joined_at))
                 eee.add_field(name="メンバー認証をしていますか?", value=aaa).set_thumbnail(
                     url=user.display_avatar.url
                 )
@@ -71,7 +72,8 @@ class Userinfo(commands.Cog):
                 else:
                     arre = user.avatar.url
                 await i.response.send_message(
-                    embed=discord.Embed(title="基本情報", color=discord.Colour.blurple())
+                    embed=discord.Embed(
+                        title="基本情報", color=discord.Colour.blurple())
                     .add_field(name="ユーザー名", value=user.name)
                     .add_field(name="id", value=f"`{user.id}`")
                     .add_field(name="ディスクリミネーター", value=f"`{user.discriminator}`")
@@ -91,7 +93,8 @@ class Userinfo(commands.Cog):
             else:
                 arre2 = user.avatar.url
             await i.response.send_message(
-                embed=discord.Embed(title="基本情報", color=discord.Colour.blurple())
+                embed=discord.Embed(
+                    title="基本情報", color=discord.Colour.blurple())
                 .add_field(name="ユーザー名", value=user.name)
                 .add_field(name="id", value=f"`{user.id}`")
                 .add_field(name="ディスクリミネーター", value=f"`{user.discriminator}`")

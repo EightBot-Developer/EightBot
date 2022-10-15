@@ -10,6 +10,7 @@ from discord import (
 from itertools import cycle
 from discord.ext import commands, tasks
 from os import listdir, system, getenv
+from webserver import keep_alive
 
 
 class EightBot(commands.Bot):
@@ -56,4 +57,9 @@ async def bot_ready():
         )
     )
 
-bot.run(getenv("token"))
+
+try:
+    bot.run(getenv("token"))
+
+except errors.HTTPException:
+    print("レートリミットに引っかかってます。")

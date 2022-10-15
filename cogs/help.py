@@ -18,7 +18,8 @@ class Help(commands.Cog):
         if not cmd:
             he = discord.Embed(title="ページ2", color=discord.Colour.blurple())
             he.add_field(name="help", value="helpを表示します。")
-            he.set_footer(text="Tips: `/help コマンド名`か、`eg!help コマンド名`でコマンドを検索できます。")
+            he.set_footer(
+                text="Tips: `/help コマンド名`か、`eg!help コマンド名`でコマンドを検索できます。")
             embeds = [
                 discord.Embed(
                     title="ページ1",
