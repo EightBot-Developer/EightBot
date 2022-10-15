@@ -9,7 +9,7 @@ class Userinfo(commands.Cog):
         self.bot: commands.Bot = bot
 
     @app_commands.command(name="userinfo", description="指定したユーザーの情報を返します。")
-    async def userinfo(self, i, user: discord.User) -> None:
+    async def userinfo(self, i, user: discord.User):
         try:
             if user.bot is True:
                 b = "はい"
@@ -37,7 +37,7 @@ class Userinfo(commands.Cog):
                 )
                 if mg.premium_since:
                     eee.add_field(
-                        name="ブーストした日時", 
+                        name="ブーストした日時",
                         value=discord.utils.format_dt(mg.premium_since)
                     )
                 if mg.timed_out_until:
@@ -53,37 +53,37 @@ class Userinfo(commands.Cog):
                 embeds = [
                     discord.Embed(title="基本情報", color=discord.Colour.blurple())
                     .add_field(
-                        name="ユーザー名", 
+                        name="ユーザー名",
                         value=user.name
                     )
                     .add_field(
-                        name="id", 
+                        name="id",
                         value=f"`{user.id}`"
                     )
                     .add_field(
-                        name="ディスクリミネーター", 
+                        name="ディスクリミネーター",
                         value=f"`{user.discriminator}`"
                     )
                     .add_field(
-                        name="Botアカウントですか？", 
+                        name="Botアカウントですか？",
                         value=b
                     )
                     .add_field(
-                        name="システムユーザーですか？", 
+                        name="システムユーザーですか？",
                         value=c
                     )
                     .add_field(
-                        name="初期アイコンのURL", 
+                        name="初期アイコンのURL",
                         value=user.default_avatar.url
                     )
                     .add_field(
-                        name="アカウント作成日時", 
+                        name="アカウント作成日時",
                         value=discord.utils.format_dt(user.created_at)
                     )
                     .add_field(
-                        name="メンション", 
+                        name="メンション",
                         value=user.mention
-                        )
+                    )
                     .set_thumbnail(url=aaaauuu),
                     eee,
                 ]
@@ -103,9 +103,9 @@ class Userinfo(commands.Cog):
                     .add_field(name="Botアカウントですか？", value=b)
                     .add_field(name="システムユーザーですか？", value=c)
                     .add_field(
-                        name="初期アイコンのURL", 
+                        name="初期アイコンのURL",
                         value=user.default_avatar.url
-                        )
+                    )
                     .add_field(
                         name="アカウント作成日", value=discord.utils.format_dt(user.created_at)
                     )

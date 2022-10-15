@@ -3,6 +3,8 @@ from discord.ext import commands
 import Paginator
 from discord import app_commands
 a = "Tips: `/help コマンド名`か、`eg!help コマンド名`でコマンドを検索できます。"
+
+
 class Help(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot: commands.Bot = bot
@@ -19,14 +21,14 @@ class Help(commands.Cog):
             he.add_field(name="help", value="helpを表示します。")
             he.set_footer(
                 text=a
-                )
+            )
             embeds = [
                 discord.Embed(
                     title="ページ1",
                     color=discord.Colour.blurple(),
                 ).set_footer(
                     text=a
-                    ),
+                ),
                 he,
             ]
             return await Paginator.Simple().start(i, pages=embeds)

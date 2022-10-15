@@ -15,8 +15,8 @@ def verify_db_get(key):
 class Button1(discord.ui.Button):
     def __init__(self):
         super().__init__(
-            label="認証", 
-            style=discord.ButtonStyle.primary, 
+            label="認証",
+            style=discord.ButtonStyle.primary,
             custom_id="verify_type_1"
         )
 
@@ -27,7 +27,7 @@ class verify(commands.Cog):
 
     @app_commands.describe(name="パネルの名前", description="パネルの説明", role="付与するロール")
     @app_commands.command(
-        name="verify", 
+        name="verify",
         description="ボタン式の認証パネルを生成します。"
     )
     async def nomal_verify(
