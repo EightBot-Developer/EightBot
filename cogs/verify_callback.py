@@ -23,7 +23,7 @@ class Verify_interaction(commands.Cog):
                     i.guild.get_role(int(data["role_id"]))
                 )
                 await i.response.send_message("ロールを付与しました。", ephemeral=True)
-        except:
+        except KeyError:
             pass
 
 

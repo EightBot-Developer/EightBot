@@ -9,7 +9,7 @@ from discord import (
 )
 from itertools import cycle
 from discord.ext import commands, tasks
-from os import listdir, system, getenv
+from os import listdir, getenv
 from webserver import keep_alive
 
 
@@ -42,7 +42,10 @@ bot = EightBot(
 
 @tasks.loop(seconds=5)
 async def status_swap(cycle_d):
-    await bot.change_presence(activity=Game(next(cycle_d)), status=Status.online)
+    await bot.change_presence(
+        activity=Game(next(cycle_d)), 
+        status=Status.online
+    )
 
 
 @bot.listen(name="on_ready")
