@@ -43,7 +43,7 @@ bot = EightBot(
 @tasks.loop(seconds=5)
 async def status_swap(cycle_d):
     await bot.change_presence(
-        activity=Game(next(cycle_d)), 
+        activity=Game(next(cycle_d)),
         status=Status.online
     )
 

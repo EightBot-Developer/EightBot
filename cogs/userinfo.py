@@ -9,7 +9,11 @@ class Userinfo(commands.Cog):
         self.bot: commands.Bot = bot
 
     @app_commands.command(name="userinfo", description="指定したユーザーの情報を返します。")
-    async def userinfo(self, i, user: discord.User):
+    async def userinfo(
+        self,
+        i: discord.Interaction,
+        user: discord.User
+    ):
         try:
             if user.bot is True:
                 b = "はい"
