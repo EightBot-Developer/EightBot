@@ -16,12 +16,20 @@ class afk(commands.Cog):
         self.bot: commands.Bot = bot
     @app_commands.describe(reason="afkになる理由")
     @app_commands.command(name="afk_set", description="afkをセット又は解除します。")
-    async def afk(self, i: discord.Interaction, reason: str):
+    async def afks(self, i: discord.Interaction, reason: str):
         try:
             afk_set_db(int(i.user.id), reason)
             await i.response.send_message("afkをセットしました！")
         except:
             await i.response.send_message("afkをセットできませんでした。", ephemeral=True)
+
+    @app_commands.command(name="afk_kaizyo", description="afkを解除します")
+    async def afkk(self, i: discord.Interaction):
+        try:
+            afk_set_db(int(i.user.id), False)
+            await i.response.send_message("afkを解除しました！")
+        except:
+            await i.response.send_message("afkを解除できませんでした。", ephemeral=True)
 
     @commands.Cog.listener(name='on_message')
     async def afk_msg(self, message: discord.Message):
