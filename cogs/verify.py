@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 from replit import db
-
+import json
 
 def verify_db(key, data):
     db[f"verify_1_db_{key}"] = data
