@@ -13,7 +13,7 @@ class ban_member(commands.Cog):
         try:
             if i.guild.channels.permissions_for(i.user) == discord.Permissions.ban_members:
                 if i.guild.channels.permissions_for(i.guild.get_member(self.bot.user.id)) == discord.Permissions.ban_members:
-                    async for entry in guild.bans(limit=150):
+                    async for entry in i.guild.bans(limit=150):
                         m.append(f"{entry.user.name}, ")
                     send_content = "".join(m)
                     await i.response.send_message(send_content)
