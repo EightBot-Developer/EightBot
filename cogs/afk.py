@@ -15,7 +15,7 @@ def afk_get(key):
 class afk(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot: commands.Bot = bot
-    
+
     @app_commands.describe(reason="afkになる理由")
     @app_commands.command(name="afk_set", description="afkをセット又は解除します。")
     async def afks(self, i: discord.Interaction, reason: str):

@@ -6,7 +6,7 @@ import discord
 class ban_member(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot: commands.Bot = bot
-    
+
     @app_commands.command(name="ban_member", description="Banされたユーザー一覧を表示します。")
     async def ban_members(self, i: discord.Interaction):
         m = []
@@ -23,8 +23,6 @@ class ban_member(commands.Cog):
                 await i.response.send_message("データを取得できませんでした(権限がないなどの原因で)", ephemeral=True)
         except:
             await i.response.send_message("データを取得できませんでした(権限がないなどの原因で)", ephemeral=True)
-        
-
 
 
 async def setup(bot: commands.Bot) -> None:
