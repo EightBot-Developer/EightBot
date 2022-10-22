@@ -3,17 +3,17 @@ from discord import app_commands
 import discord
 import string
 import random
-import requests  #Todo: aiohttpを使うようにする
+import requests
+# Todo: aiohttpを使うようにする
 
 
 def voicesave(text):
-        url = f"https://www.google.com/speech-api/v1/synthesize?text={text}&nc=mpeg&lang=ja&speed=0.5&client=lr-language-tts"
-        randomstring = "".join(
-            random.choices(string.ascii_letters + string.digits, k=10))
-        name = "../voice/" + randomstring + ".mp3"
-        response = requests.get(url, timeout=100)
-        with open(name, "wb") as file:
-            file.write(response.content)
+    url = f"https://www.google.com/speech-api/v1/synthesize?text={text}&nc=mpeg&lang=ja&speed=0.5&client=lr-language-tts"
+    randomstring = "".join(random.choices(string.ascii_letters + string.digits, k=10))
+    name = "../voice/" + randomstring + ".mp3"
+    response = requests.get(url, timeout=100)
+    with open(name, "wb") as file:
+        file.write(response.content)
 
 
 class voice_text(commands.Cog):

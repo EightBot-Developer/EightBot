@@ -65,11 +65,10 @@ class bot_invite(commands.Cog):
             else:
                 await i.response.send_message("指定したものはBotではありません。")
         else:
-                await i.response.send_message("セレクトメニューをクリックして選択してください")
-                msg = await self.bot.get_channel(i.channel.id).send(view=MyView())
-                db_set(int(msg.id), int(self.bot.id))
-                self.bot.add_view(MyView(), message_id=msg.id)
-
+            await i.response.send_message("セレクトメニューをクリックして選択してください")
+            msg = await self.bot.get_channel(i.channel.id).send(view=MyView())
+            db_set(int(msg.id), int(self.bot.id))
+            self.bot.add_view(MyView(), message_id=msg.id)
 
 
 async def setup(bot: commands.Bot) -> None:
