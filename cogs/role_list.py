@@ -19,4 +19,4 @@ class role_list(commands.Cog):
 
 
 async def setup(bot: commands.Bot) -> None:
-    await bot.add_cog(bot_invite(bot))
+    await bot.add_cog(role_list(bot))
