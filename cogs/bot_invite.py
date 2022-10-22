@@ -3,18 +3,21 @@ from discord import app_commands
 import discord
 from replit import db
 
+
 def db_set(key, data):
     db[f"bot_invite_db_id_{key}"] = data
 
 
 def db_get(key):
     return db[f"bot_invite_db_id_{key}"]
+
+
 class MyView(discord.ui.View):
-    @discord.ui.select( 
-        placeholder = "招待するBotの権限を選択して下さい",
-        min_values = 1,
-        max_values = 1,
-        options = [
+    @discord.ui.select(
+        placeholder="招待するBotの権限を選択して下さい",
+        min_values=1,
+        max_values=1,
+        options=[
             discord.SelectOption(
                 label="管理者",
                 description="全ての権限を有効にしたURLを生成します。",
@@ -33,7 +36,7 @@ class MyView(discord.ui.View):
 
         ]
     )
-    async def select_callback(self, select, i): # the function called when the user is done selecting options
+    async def select_callback(self, select, i):
         bot_id = db_get(i.message.id)
         d = select.values[0]
         if d == "admin":
@@ -43,7 +46,9 @@ class MyView(discord.ui.View):
         elif d == "none":
             await i.response.edit_message(f"セレクトメニューをクリックして選択してください\n[Botを招待]({discord.utils.oauth_url(int(bot_id))})")
         else:
-            await i.response.edit_message(f"セレクトメニューをクリックして選択してください\n不明なパラメーターが選択されました。")
+            await i.response.edit_message("セレクトメニューをクリックして選択してください\n不明なパラメーターが選択されました。")
+
+
 class bot_invite(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot: commands.Bot = bot
