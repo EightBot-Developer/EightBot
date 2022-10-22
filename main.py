@@ -11,10 +11,12 @@ from itertools import cycle
 from discord.ext import commands, tasks
 from os import listdir, getenv
 from webserver import keep_alive
+from datetime import datetime
 
 
 class EightBot(commands.Bot):
     async def setup_hook(self):
+        self.kidou = 0
         await keep_alive()
         for name in listdir("cogs"):
             if not name.startswith(("_", ".")):
@@ -50,6 +52,7 @@ async def status_swap(cycle_d):
 
 @bot.listen(name="on_ready")
 async def bot_ready():
+    bot.kidou = int(datetime.now().timestamp())
     print("login.")
     await status_swap.start(
         cycle(
