@@ -21,7 +21,7 @@ class voice_text(commands.Cog):
 
     @app_commands.describe(text="喋らせるテキスト")
     @app_commands.command(name="voice_text", description="googleの声が出力できます。")
-    async def rolelists(self, i: discord.Interaction, text: str):
+    async def voice(self, i: discord.Interaction, text: str):
         save = voicesave(text)
         await i.response.send_message(file=discord.File(save))
 
