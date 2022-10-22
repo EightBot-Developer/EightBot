@@ -1,6 +1,7 @@
 from discord.ext import commands
 from discord import app_commands
 import discord
+import string
 import requests  #Todo: aiohttpを使うようにする
 
 
@@ -9,7 +10,7 @@ class voice_text(commands.Cog):
         self.bot: commands.Bot = bot
 
     def voicesave(text):
-        url = f"https://www.google.com/speech-api/v1/synthesize?text={voice}&nc=mpeg&lang=ja&speed=0.5&client=lr-language-tts"
+        url = f"https://www.google.com/speech-api/v1/synthesize?text={text}&nc=mpeg&lang=ja&speed=0.5&client=lr-language-tts"
         randomstring = "".join(
             random.choices(string.ascii_letters + string.digits, k=10))
         name = "../voice/" + randomstring + ".mp3"
