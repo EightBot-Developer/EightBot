@@ -53,6 +53,7 @@ class bot_invite(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot: commands.Bot = bot
 
+    @app_commands.describe(bot="招待するBot")
     @app_commands.command(name="bot_invite", description="Botの招待リンクを生成します。")
     async def botinvite(self, i: discord.Interaction, bot: discord.User = None):
         if bot:
@@ -61,6 +62,14 @@ class bot_invite(commands.Cog):
                 msg = await self.bot.get_channel(i.channel.id).send(view=MyView())
                 db_set(int(msg.id), int(bot.id))
                 self.bot.add_view(MyView(), message_id=msg.id)
+            else:
+                await i.response.send_message("指定したものはBotではありません。")
+        else:
+                await i.response.send_message("セレクトメニューをクリックして選択してください")
+                msg = await self.bot.get_channel(i.channel.id).send(view=MyView())
+                db_set(int(msg.id), int(self.bot.id))
+                self.bot.add_view(MyView(), message_id=msg.id)
+
 
 
 async def setup(bot: commands.Bot) -> None:
