@@ -6,11 +6,7 @@ import random
 import requests  #Todo: aiohttpを使うようにする
 
 
-class voice_text(commands.Cog):
-    def __init__(self, bot: commands.Bot) -> None:
-        self.bot: commands.Bot = bot
-
-    def voicesave(text):
+def voicesave(text):
         url = f"https://www.google.com/speech-api/v1/synthesize?text={text}&nc=mpeg&lang=ja&speed=0.5&client=lr-language-tts"
         randomstring = "".join(
             random.choices(string.ascii_letters + string.digits, k=10))
@@ -18,6 +14,11 @@ class voice_text(commands.Cog):
         response = requests.get(url, timeout=100)
         with open(name, "wb") as file:
             file.write(response.content)
+
+
+class voice_text(commands.Cog):
+    def __init__(self, bot: commands.Bot) -> None:
+        self.bot: commands.Bot = bot
 
     @app_commands.describe(text="喋らせるテキスト")
     @app_commands.command(name="voice_text", description="googleの声が出力できます。")
