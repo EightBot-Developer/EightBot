@@ -29,9 +29,7 @@ class verify(commands.Cog):
     @commands.Cog.listener(name='on_interaction')
     async def verify_interaction_callback(self, i: discord.Interaction):
         try:
-            get = json.dumps(i.data)
-            json_get = json.loads(get)
-            if json_get["custom_id"] == "verify_type_1":
+            if i.data.get('custom_id') == "verify_type_1":
                 data = verify_db_get(int(i.message.id))
                 await i.guild.get_member(i.user.id).add_roles(
                     i.guild.get_role(int(data["role_id"]))
