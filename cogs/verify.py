@@ -28,15 +28,14 @@ class verify(commands.Cog):
 
     @commands.Cog.listener(name='on_interaction')
     async def verify_interaction_callback(self, i: discord.Interaction):
-        try:
-            if i.data.get('custom_id') == "verify_type_1":
-                data = verify_db_get(int(i.message.id))
-                await i.guild.get_member(i.user.id).add_roles(
+        if i.data.get('custom_id') == "verify_type_1":
+            data = verify_db_get(int(i.message.id))
+            await i.guild.get_member(i.user.id).add_roles(
                     i.guild.get_role(int(data["role_id"]))
-                )
-                await i.response.send_message("ロールを付与しました。", ephemeral=True)
-        except KeyError:
-            pass
+            )
+            await i.response.send_message("ロールを付与しました。", ephemeral=True)
+        else:
+            return
 
     @app_commands.describe(name="パネルの名前", description="パネルの説明", role="付与するロール")
     @app_commands.command(
