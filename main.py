@@ -29,7 +29,7 @@ class EightBot(commands.Bot):
 
 bot = EightBot(
     command_prefix="eg!",
-    intents=Intents(auto_moderation=False, typing=False, message_content=True),
+    intents=Intents(auto_moderation=False, typing=False),
     activity=Activity(
         type=ActivityType.watching,
         name="起動準備をしています...",
