@@ -31,7 +31,7 @@ class role_list(commands.Cog):
         app_commands.Choice(name='はい', value=True),
         app_commands.Choice(name='いいえ', value=False),
     ])
-    @app_commands.command(name="role_all_add", description="全員からロールを除去します。")
+    @app_commands.command(name="role_all_remove", description="全員からロールを除去します。")
     async def role_all_add(self, i: discord.Interaction, role: discord.Role, bot: bool):
         if bot:
             for member in ctx.guild.members:
