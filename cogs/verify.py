@@ -2,7 +2,6 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 from replit import db
-import json
 
 
 def verify_db(key, data):
@@ -31,7 +30,7 @@ class verify(commands.Cog):
         if i.data.get('custom_id') == "verify_type_1":
             data = verify_db_get(int(i.message.id))
             await i.guild.get_member(i.user.id).add_roles(
-                    i.guild.get_role(int(data["role_id"]))
+                i.guild.get_role(int(data["role_id"]))
             )
             await i.response.send_message("ロールを付与しました。", ephemeral=True)
         else:

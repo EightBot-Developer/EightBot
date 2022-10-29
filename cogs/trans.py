@@ -7,7 +7,7 @@ import async_google_trans_new
 class trans_kinou(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot: commands.Bot = bot
-    
+
     @app_commands.describe(text='翻訳するテキスト', lang="翻訳をする言語")
     @app_commands.choices(lang=[
         app_commands.Choice(name='アルメニア語', value='hy'),
@@ -36,6 +36,7 @@ class trans_kinou(commands.Cog):
     async def trans_cmd(self, i: discord.Interaction, lang: str, text: str):
         g = async_google_trans_new.AsyncTranslator()
         await i.response.send_message(content=await g.translate(text, lang))
+
 
 async def setup(bot: commands.Bot) -> None:
     await bot.add_cog(trans_kinou(bot))
