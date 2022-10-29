@@ -1,42 +1,32 @@
 from discord.ext import commands
 from discord import app_commands
 import discord
+import async_google_trans_new
+import cld3
 
 
-class role_list(commands.Cog):
+class trans_kinou(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot: commands.Bot = bot
     
-    @app_commands.describe(bot='Botにもロールを付与する?')
-    @app_commands.choices(bot=[
-        app_commands.Choice(name='はい', value=True),
-        app_commands.Choice(name='いいえ', value=False),
-    ])
-    @app_commands.command(name="role_all_add", description="全メンバーにロールを付与します。")
-    async def role_all_add(self, i: discord.Interaction, role: discord.Role, bot: bool):
-        if bot:
-            for member in ctx.guild.members:
-                await member.add_roles(role)
-        elif not bot:
-            for member in ctx.guild.members:
-                if not member.bot:
-                    await member.add_roles(role)
-    
-    @app_commands.describe(bot='Botのロールも除去する?')
-    @app_commands.choices(bot=[
-        app_commands.Choice(name='はい', value=True),
-        app_commands.Choice(name='いいえ', value=False),
-    ])
-    @app_commands.command(name="role_all_remove", description="全員からロールを除去します。")
-    async def role_all_add(self, i: discord.Interaction, role: discord.Role, bot: bool):
-        if bot:
-            for member in ctx.guild.members:
-                await member.remove_roles(role)
-        elif not bot:
-            for member in ctx.guild.members:
-                if not member.bot:
-                    await member.remove_roles(role)
+    @app_commands.context_menu()
+    async def trans(i: discord.Interaction, message: discord.Message):
+        cld3_languages = cld3.get_frequent_languages(
+        message.content,
+        num_langs=3,
+        )
+        a = 0
+        language_list = []
+        for l in cld3_languages:
+            a = a + 1
+            if a == 2:
+                continue
+            else:
+                language_list.append(l[0])
+        g = async_google_trans_new.AsyncTranslator()
+        trans_d = await g.translate(message.content, str(language_list[0]))
+        await interaction.response.send_message(f'[元メッセージ](https://discord.com/channels/{message.guild.id}/{message.channel.id}/{message.id})', embed=discord.Embed(title='翻訳結果', description=str(trans_d)))
 
 
 async def setup(bot: commands.Bot) -> None:
-    await bot.add_cog(role_list(bot))
+    await bot.add_cog(trans_kinou(bot))

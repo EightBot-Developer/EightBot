@@ -8,7 +8,7 @@ class bot(enum.Enum):
     はい = True
     いいえ = False
 
-class role_list(commands.Cog):
+class roleall(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot: commands.Bot = bot
     
@@ -44,4 +44,4 @@ class role_list(commands.Cog):
 
 
 async def setup(bot: commands.Bot) -> None:
-    await bot.add_cog(role_list(bot))
+    await bot.add_cog(roleall(bot))
