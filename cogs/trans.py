@@ -32,7 +32,7 @@ class trans_kinou(commands.Cog):
         app_commands.Choice(name='トルコ語', value='tr'),
         app_commands.Choice(name='ウルドゥー語', value='ur'),
     ])
-    @app_commands.command(name="google_trans", description="全メンバーにロールを付与します。")
+    @app_commands.command(name="google_trans", description="Google翻訳をします。")
     async def trans_cmd(self, i: discord.Interaction, lang: str, text: str):
         g = async_google_trans_new.AsyncTranslator()
         await i.response.send_message(content=await g.translate(text, lang))
