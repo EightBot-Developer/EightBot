@@ -1,12 +1,7 @@
 from discord.ext import commands
 from discord import app_commands
 import discord
-import enum
 
-
-class bot(enum.Enum):
-    はい = True
-    いいえ = False
 
 class role_list(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
@@ -20,10 +15,10 @@ class role_list(commands.Cog):
     @app_commands.command(name="role_all_add", description="全メンバーにロールを付与します。")
     async def role_all_add(self, i: discord.Interaction, role: discord.Role, bot: bool):
         if bot:
-            for member in i.guild.members:
+            for member in ctx.guild.members:
                 await member.add_roles(role)
         elif not bot:
-            for member in i.guild.members:
+            for member in ctx.guild.members:
                 if not member.bot:
                     await member.add_roles(role)
     
@@ -35,10 +30,10 @@ class role_list(commands.Cog):
     @app_commands.command(name="role_all_remove", description="全員からロールを除去します。")
     async def role_all_add(self, i: discord.Interaction, role: discord.Role, bot: bool):
         if bot:
-            for member in i.guild.members:
+            for member in ctx.guild.members:
                 await member.remove_roles(role)
         elif not bot:
-            for member in i.guild.members:
+            for member in ctx.guild.members:
                 if not member.bot:
                     await member.remove_roles(role)
 
