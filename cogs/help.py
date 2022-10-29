@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import Paginator
 from discord import app_commands
-a = "Tips: `/help コマンド名`か、`eg!help コマンド名`でコマンドを検索できます。"
+a = "Tips: `/help コマンド名`でコマンドを検索できます。"
 
 
 class Help(commands.Cog):
