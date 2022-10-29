@@ -23,8 +23,13 @@ class trans_kinou(commands.Cog):
                 continue
             else:
                 language_list.append(l[0])
+        lang = "en"
+        if str(language_list[0]) == "ja":
+            lang = "en"
+        else:
+            lang = "ja"
         g = async_google_trans_new.AsyncTranslator()
-        trans_d = await g.translate(message.content, str(language_list[0]))
+        trans_d = await g.translate(message.content, lang)
         await interaction.response.send_message(f'[元メッセージ](https://discord.com/channels/{message.guild.id}/{message.channel.id}/{message.id})', embed=discord.Embed(title='翻訳結果', description=str(trans_d)))
 
 
