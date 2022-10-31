@@ -27,10 +27,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install flake8 pipenv 
-        pipenv install pyright discord.py replit discord.py-pagination requests async-google-trans-new
-        pipenv install
-    - name: Lint with flake8 & Pyright
+    - name: Lint with flake8
       run: |
         flake8 . --count --ignore=E501,E722,C901 --select=E9,F63,F7,F82 --show-source --statistics
         flake8 . --count --ignore=E501,E722,C901 --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-        pipenv run pyright **/*.py
