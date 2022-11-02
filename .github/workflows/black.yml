@@ -23,7 +23,7 @@ jobs:
           - name: Add path for Poetry
             run: echo "$HOME/.poetry/bin" >> $GITHUB_PATH
           - name: Install Dependencies
-            run: poetry install --no-interaction
+            run: poetry install black
           - name: black
             run: poetry run black .
           - name: autoflake
