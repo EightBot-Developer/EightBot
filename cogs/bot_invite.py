@@ -24,27 +24,28 @@ class MyView(discord.ui.View):
                 value="admin",
             ),
             discord.SelectOption(
-                label="権限選択式",
-                description="全ての権限を選択式にしたURLを生成します。",
-                value="all"
+                label="権限選択式", description="全ての権限を選択式にしたURLを生成します。", value="all"
             ),
             discord.SelectOption(
-                label="権限なし",
-                description="全ての権限をなしにしたURLを生成します。",
-                value="none"
+                label="権限なし", description="全ての権限をなしにしたURLを生成します。", value="none"
             ),
-
-        ]
+        ],
     )
     async def select_callback(self, select, i):
         bot_id = db_get(i.message.id)
         d = select.values[0]
         if d == "admin":
-            await i.response.edit_message(f"セレクトメニューをクリックして選択してください\n[Botを招待]({discord.utils.oauth_url(int(bot_id), permissions=discord.Permissions(permissions=discord.Permissions.administrator.flag))})")
+            await i.response.edit_message(
+                f"セレクトメニューをクリックして選択してください\n[Botを招待]({discord.utils.oauth_url(int(bot_id), permissions=discord.Permissions(permissions=discord.Permissions.administrator.flag))})"
+            )
         elif d == "all":
-            await i.response.edit_message(f"セレクトメニューをクリックして選択してください\n[Botを招待]({discord.utils.oauth_url(int(bot_id), permissions=discord.Permissions(permissions=discord.Permissions.all()))})")
+            await i.response.edit_message(
+                f"セレクトメニューをクリックして選択してください\n[Botを招待]({discord.utils.oauth_url(int(bot_id), permissions=discord.Permissions(permissions=discord.Permissions.all()))})"
+            )
         elif d == "none":
-            await i.response.edit_message(f"セレクトメニューをクリックして選択してください\n[Botを招待]({discord.utils.oauth_url(int(bot_id))})")
+            await i.response.edit_message(
+                f"セレクトメニューをクリックして選択してください\n[Botを招待]({discord.utils.oauth_url(int(bot_id))})"
+            )
         else:
             await i.response.edit_message("セレクトメニューをクリックして選択してください\n不明なパラメーターが選択されました。")
 

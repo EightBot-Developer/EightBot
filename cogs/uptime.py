@@ -9,7 +9,7 @@ class uptime(commands.Cog):
 
     @app_commands.command(name="up_time", description="Botの起動時間を送信します。")
     async def uptime(self, i: discord.Interaction):
-        await i.response.send_message(f'<t:{self.bot.kidou}:F>')
+        await i.response.send_message(f"<t:{self.bot.kidou}:F>")
 
 
 async def setup(bot: commands.Bot) -> None:

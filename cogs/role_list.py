@@ -11,11 +11,11 @@ class role_list(commands.Cog):
     async def rolelists(self, i: discord.Interaction):
         guild = i.guild
         if len(guild.roles) > 1:
-            role = '\n'.join([r.mention for r in guild.roles][1:])
+            role = "\n".join([r.mention for r in guild.roles][1:])
             embed = discord.Embed(title="ロール一覧", description=f"{role}")
             await i.response.send_message(embed=embed)
         else:
-            await i.response.send_message('ロールが見つかりませんでした。')
+            await i.response.send_message("ロールが見つかりませんでした。")
 
 
 async def setup(bot: commands.Bot) -> None:
