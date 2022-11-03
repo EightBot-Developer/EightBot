@@ -15,11 +15,11 @@ class imgcheck(commands.Cog):
         load_text = "拾い画チェッカーAPIに接続しています"
         await i.response.send_message(load_text)
         await asyncio.sleep(1)
-        await i.response.edit_message("{load_text}.")
+        await i.response.edit_message(content="{load_text}.")
         await asyncio.sleep(1)
-        await i.response.edit_message("{load_text}..")
+        await i.response.edit_message(content="{load_text}..")
         await asyncio.sleep(1)
-        await i.response.edit_message("{load_text}...")
+        await i.response.edit_message(content="{load_text}...")
         async with aiohttp.ClientSession() as session:
             async with session.get(
                 f"https://api.irucabot.com/imgcheck/check_url?url={urllib.parse.quote(url)}"
