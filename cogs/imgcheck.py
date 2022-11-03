@@ -31,7 +31,7 @@ class imgcheck(commands.Cog):
                             content=None,
                             embed=discord.Embed(
                                 title="これは拾い画です。",
-                                description=f"この画像と一致している画像が{resp_data['count']}個ありました。\n[Google画像検索結果]({resp_data['resulturl']}))\n\n[拾い画チェッカーAPIを使用しています。](https://imgcheck.irucabot.com/api-reference/check_url)",
+                                description=f"この画像と一致している画像が{resp_data['count']}個ありました。\n[Google画像検索結果]({resp_data['resulturl']})\n\n[拾い画チェッカーAPIを使用しています。](https://imgcheck.irucabot.com/api-reference/check_url)",
                             ),
                         )
                     elif not resp_data["found"]:
