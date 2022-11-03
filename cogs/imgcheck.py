@@ -27,7 +27,7 @@ class imgcheck(commands.Cog):
                 resp_data = await resp.json()
                 if resp_data["status"] == "success":
                     if resp_data["found"]:
-                      await i.edit_original_response(
+                        await i.edit_original_response(
                             content=None,
                             embed=discord.Embed(
                                 title="これは拾い画です。",
@@ -35,7 +35,7 @@ class imgcheck(commands.Cog):
                             ),
                         )
                     elif not resp_data["found"]:
-                      await i.edit_original_response(
+                        await i.edit_original_response(
                             content=None,
                             embed=discord.Embed(
                                 title="これは拾い画ではない可能性が高いです。",
@@ -43,7 +43,7 @@ class imgcheck(commands.Cog):
                             ),
                         )
                     else:
-                      await i.edit_original_response(
+                        await i.edit_original_response(
                             content=None,
                             embed=discord.Embed(
                                 title="起るはずの無いことが起こりました。",
@@ -51,7 +51,7 @@ class imgcheck(commands.Cog):
                             ),
                         )
                 elif resp_data["status"] == "error":
-                  await i.edit_original_response(
+                    await i.edit_original_response(
                         content=None,
                         embed=discord.Embed(
                             title="エラーが発生しました。", description=resp_data["message_ja"]
