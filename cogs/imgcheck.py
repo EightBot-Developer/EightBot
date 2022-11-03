@@ -15,11 +15,11 @@ class imgcheck(commands.Cog):
         load_text = "拾い画チェッカーAPIに接続しています"
         await i.response.send_message(load_text)
         await asyncio.sleep(1)
-        await i.response.edit_message(content="{load_text}.")
+        await i.message.edit(content="{load_text}.")
         await asyncio.sleep(1)
-        await i.response.edit_message(content="{load_text}..")
+        await i.message.edit(content="{load_text}..")
         await asyncio.sleep(1)
-        await i.response.edit_message(content="{load_text}...")
+        await i.message.edit(content="{load_text}...")
         async with aiohttp.ClientSession() as session:
             async with session.get(
                 f"https://api.irucabot.com/imgcheck/check_url?url={urllib.parse.quote(url)}"
@@ -27,7 +27,7 @@ class imgcheck(commands.Cog):
                 resp_data = await resp.json()
                 if resp_data["status"] == "success":
                     if resp_data["found"]:
-                        await i.response.edit_message(
+                        await i.message.edit(
                             content=None,
                             embed=discord.Embed(
                                 title="これは拾い画です。",
@@ -35,7 +35,7 @@ class imgcheck(commands.Cog):
                             ),
                         )
                     elif not resp_data["found"]:
-                        await i.response.edit_message(
+                        await i.message.edit(
                             content=None,
                             embed=discord.Embed(
                                 title="これは拾い画ではない可能性が高いです。",
@@ -43,7 +43,7 @@ class imgcheck(commands.Cog):
                             ),
                         )
                     else:
-                        await i.response.edit_message(
+                        await i.message.edit(
                             content=None,
                             embed=discord.Embed(
                                 title="起るはずの無いことが起こりました。",
@@ -51,7 +51,7 @@ class imgcheck(commands.Cog):
                             ),
                         )
                 elif resp_data["status"] == "error":
-                    await i.response.edit_message(
+                    await i.message.edit(
                         content=None,
                         embed=discord.Embed(
                             title="エラーが発生しました。", description=resp_data["message_ja"]
