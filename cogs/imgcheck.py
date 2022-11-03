@@ -32,7 +32,7 @@ class imgcheck(commands.Cog):
                             embed=discord.Embed(
                                 title="これは拾い画です。",
                                 description=f"この画像と一致している画像が{resp_data['count']}個ありました。\n[Google画像検索結果]({resp_data['resulturl']}))\n\n[拾い画チェッカーAPIを使用しています。](https://imgcheck.irucabot.com/api-reference/check_url)",
-                            )
+                            ),
                         )
                     elif not resp_data["found"]:
                         await i.response.edit_message(
@@ -40,7 +40,7 @@ class imgcheck(commands.Cog):
                             embed=discord.Embed(
                                 title="これは拾い画ではない可能性が高いです。",
                                 description=f"この画像と一致している画像が0個ありました。\n\n[拾い画チェッカーAPIを使用しています。](https://imgcheck.irucabot.com/api-reference/check_url)",
-                            )
+                            ),
                         )
                     else:
                         await i.response.edit_message(
@@ -48,14 +48,14 @@ class imgcheck(commands.Cog):
                             embed=discord.Embed(
                                 title="起るはずの無いことが起こりました。",
                                 description=f"起るはずの無いことが起こったので、結果を表示できません。",
-                            )
+                            ),
                         )
                 elif resp_data["status"] == "error":
                     await i.response.edit_message(
                         content=None,
                         embed=discord.Embed(
                             title="エラーが発生しました。", description=resp_data["message_ja"]
-                        )
+                        ),
                     )
 
 
