@@ -10,8 +10,8 @@ class imgcheck(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot: commands.Bot = bot
 
-    @app_commands.command(name="imgcheck", description="URLの画像から拾い画かチェックするコマンド。")
-    async def imgcheck(self, i: discord.Interaction, url: str):
+    @app_commands.command(name="img_url_check", description="URLの画像から拾い画かチェックするコマンド。")
+    async def img_url_check(self, i: discord.Interaction, url: str):
         load_text = "拾い画チェッカーAPIに接続しています"
         await i.response.send_message(load_text)
         await asyncio.sleep(1)
