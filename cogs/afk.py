@@ -2,7 +2,7 @@ from discord.ext import commands
 from discord import app_commands
 from replit import db
 import discord
-
+from color import color
 
 def afk_set_db(key, data):
     db[f"afk_{key}"] = data
@@ -21,17 +21,45 @@ class afk(commands.Cog):
     async def afks(self, i: discord.Interaction, reason: str):
         try:
             afk_set_db(int(i.user.id), reason)
-            await i.response.send_message("afkをセットしました！")
+            await i.response.send_message(
+                embed=discord.Embed(
+                    title="<:check_mark:985366958537076766> : 成功",
+                    description="afkをセットしました。",
+                    color=color,
+                ),
+                ephemeral=True,
+            )
         except:
-            await i.response.send_message("afkをセットできませんでした。", ephemeral=True)
+            await i.response.send_message(
+                embed=discord.Embed(
+                    title="<:error_mark:985366305156767794> : 失敗",
+                    description="何らかのエラーが発生しました。",
+                    color=color,
+                ),
+                ephemeral=True,
+            )
 
     @app_commands.command(name="afk_kaizyo", description="afkを解除します")
     async def afkk(self, i: discord.Interaction):
         try:
             afk_set_db(int(i.user.id), False)
-            await i.response.send_message("afkを解除しました！")
+            await i.response.send_message(
+                    embed=discord.Embed(
+                        title="<:check_mark:985366958537076766> : 成功",
+                        description="afkを解除しました。",
+                        color=color,
+                    ),
+                    ephemeral=True,
+                )
         except:
-            await i.response.send_message("afkを解除できませんでした。", ephemeral=True)
+            await i.response.send_message(
+                embed=discord.Embed(
+                    title="<:error_mark:985366305156767794> : 失敗",
+                    description="何らかのエラーが発生しました。",
+                    color=color,
+                ),
+                ephemeral=True,
+            )
 
     @commands.Cog.listener(name="on_message")
     async def afk_msg(self, message: discord.Message):
