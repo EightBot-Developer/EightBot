@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from discord import app_commands
+import urllib.parse
 
 
 class gosentyouen(commands.Cog):
@@ -60,8 +61,9 @@ class gosentyouen(commands.Cog):
         noalpha: str,
         rainbow: str,
     ):
+        embed = discord.Embed(title="5000兆円ほしい!!").set_image(url=f"https://gsapi.cbrx.io/image?top={urllib.parse.quote(top)}&bottom={urllib.parse.quote(bottom)}&type={urllib.parse.quote(type)}&q={urllib.parse.quote(quality)}&hoshii={urllib.parse.quote(hoshii)}&noalpha={urllib.parse.quote(noalpha)}&rainbow={urllib.parse.quote(rainbow)}")
         await i.response.send_message(
-            f"https://gsapi.cbrx.io/image?top={top}&bottom={bottom}&type={type}&q={quality}&hoshii={hoshii}&noalpha={noalpha}&rainbow={rainbow}"
+            embed=embed
         )
 
 
