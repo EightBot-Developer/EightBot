@@ -4,6 +4,7 @@ import discord
 import string
 import random
 import requests
+
 # Todo: aiohttpを使うようにする
 
 

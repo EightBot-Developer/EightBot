@@ -11,13 +11,13 @@ class ban_member(commands.Cog):
     async def ban_members(self, i: discord.Interaction):
         m = []
         async for entry in i.guild.bans(limit=999999):
-          m.append(f"{entry.user.name}, ")
+            m.append(f"{entry.user.name}, ")
         if not len(m) == 0:
-          end = len(m) - 1
-          m[end] = m[end].split(', ')[0]
-          send_content = "".join(m)
+            end = len(m) - 1
+            m[end] = m[end].split(", ")[0]
+            send_content = "".join(m)
         elif len(m) == 0:
-          send_content = "Banされたユーザーはいません。"
+            send_content = "Banされたユーザーはいません。"
         await i.response.send_message(send_content)
 
 

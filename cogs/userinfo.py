@@ -10,11 +10,7 @@ class Userinfo(commands.Cog):
 
     @app_commands.describe(user="ユーザー")
     @app_commands.command(name="userinfo", description="指定したユーザーの情報を返します。")
-    async def userinfo(
-        self,
-        i: discord.Interaction,
-        user: discord.User
-    ):
+    async def userinfo(self, i: discord.Interaction, user: discord.User):
         try:
             if user.bot is True:
                 b = "はい"
@@ -35,15 +31,13 @@ class Userinfo(commands.Cog):
                     color=discord.Colour.blurple(),
                 )
                 eee.add_field(name="ニックネーム", value=mg.nick)
-                eee.add_field(
-                    name="参加日時", value=discord.utils.format_dt(mg.joined_at))
+                eee.add_field(name="参加日時", value=discord.utils.format_dt(mg.joined_at))
                 eee.add_field(name="メンバー認証をしていますか?", value=aaa).set_thumbnail(
                     url=user.display_avatar.url
                 )
                 if mg.premium_since:
                     eee.add_field(
-                        name="ブーストした日時",
-                        value=discord.utils.format_dt(mg.premium_since)
+                        name="ブーストした日時", value=discord.utils.format_dt(mg.premium_since)
                     )
                 if mg.timed_out_until:
                     eee.add_field(
@@ -57,38 +51,16 @@ class Userinfo(commands.Cog):
                     aaaauuu = user.avatar.url
                 embeds = [
                     discord.Embed(title="基本情報", color=discord.Colour.blurple())
+                    .add_field(name="ユーザー名", value=user.name)
+                    .add_field(name="id", value=f"`{user.id}`")
+                    .add_field(name="ディスクリミネーター", value=f"`{user.discriminator}`")
+                    .add_field(name="Botアカウントですか？", value=b)
+                    .add_field(name="システムユーザーですか？", value=c)
+                    .add_field(name="初期アイコンのURL", value=user.default_avatar.url)
                     .add_field(
-                        name="ユーザー名",
-                        value=user.name
+                        name="アカウント作成日時", value=discord.utils.format_dt(user.created_at)
                     )
-                    .add_field(
-                        name="id",
-                        value=f"`{user.id}`"
-                    )
-                    .add_field(
-                        name="ディスクリミネーター",
-                        value=f"`{user.discriminator}`"
-                    )
-                    .add_field(
-                        name="Botアカウントですか？",
-                        value=b
-                    )
-                    .add_field(
-                        name="システムユーザーですか？",
-                        value=c
-                    )
-                    .add_field(
-                        name="初期アイコンのURL",
-                        value=user.default_avatar.url
-                    )
-                    .add_field(
-                        name="アカウント作成日時",
-                        value=discord.utils.format_dt(user.created_at)
-                    )
-                    .add_field(
-                        name="メンション",
-                        value=user.mention
-                    )
+                    .add_field(name="メンション", value=user.mention)
                     .set_thumbnail(url=aaaauuu),
                     eee,
                 ]
@@ -100,17 +72,13 @@ class Userinfo(commands.Cog):
                 else:
                     arre = user.avatar.url
                 await i.response.send_message(
-                    embed=discord.Embed(
-                        title="基本情報", color=discord.Colour.blurple())
+                    embed=discord.Embed(title="基本情報", color=discord.Colour.blurple())
                     .add_field(name="ユーザー名", value=user.name)
                     .add_field(name="id", value=f"`{user.id}`")
                     .add_field(name="ディスクリミネーター", value=f"`{user.discriminator}`")
                     .add_field(name="Botアカウントですか？", value=b)
                     .add_field(name="システムユーザーですか？", value=c)
-                    .add_field(
-                        name="初期アイコンのURL",
-                        value=user.default_avatar.url
-                    )
+                    .add_field(name="初期アイコンのURL", value=user.default_avatar.url)
                     .add_field(
                         name="アカウント作成日", value=discord.utils.format_dt(user.created_at)
                     )
@@ -124,8 +92,7 @@ class Userinfo(commands.Cog):
             else:
                 arre2 = user.avatar.url
             await i.response.send_message(
-                embed=discord.Embed(
-                    title="基本情報", color=discord.Colour.blurple())
+                embed=discord.Embed(title="基本情報", color=discord.Colour.blurple())
                 .add_field(name="ユーザー名", value=user.name)
                 .add_field(name="id", value=f"`{user.id}`")
                 .add_field(name="ディスクリミネーター", value=f"`{user.discriminator}`")

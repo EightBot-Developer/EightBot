@@ -9,7 +9,7 @@ class ping(commands.Cog):
 
     @app_commands.command(name="ping", description="ping値を測定します。")
     async def pingpong(self, i: discord.Interaction):
-        await i.response.send_message(f'{round(self.bot.latency * 1000)}ms')
+        await i.response.send_message(f"{round(self.bot.latency * 1000)}ms")
 
 
 async def setup(bot: commands.Bot) -> None:

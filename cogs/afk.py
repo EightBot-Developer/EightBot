@@ -33,13 +33,15 @@ class afk(commands.Cog):
         except:
             await i.response.send_message("afkを解除できませんでした。", ephemeral=True)
 
-    @commands.Cog.listener(name='on_message')
+    @commands.Cog.listener(name="on_message")
     async def afk_msg(self, message: discord.Message):
         try:
             if message.mentions:
                 for d in message.mentions:
                     if afk_get[int(d.id)]:
-                        await message.channel.send("このユーザーはafkです。(こののメッセージは10秒後に削除されます。)", delete_after=10)
+                        await message.channel.send(
+                            "このユーザーはafkです。(こののメッセージは10秒後に削除されます。)", delete_after=10
+                        )
         except:
             pass
 
