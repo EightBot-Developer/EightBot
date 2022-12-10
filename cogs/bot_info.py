@@ -19,7 +19,7 @@ class bot_info(commands.Cog):
     @app_commands.command(name="bot_info", description="Botの情報を表示します。")
     async def botinfo(self, i: discord.Interaction):
         await i.response.send_message(
-            embed=discord.Embed(title="Botの情報").add_field(
+            embed=discord.Embed(title="Botの情報", color=0x3498DB).add_field(
                 name="全コマンドの合計実行数", value=str(bot_command_all_count_db_get())
             ),
             ephemeral=True,

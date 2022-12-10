@@ -11,11 +11,16 @@ def db_set(key, data):
 def db_get(key):
     return db[f"bot_invite_db_id_{key}"]
 
-
 class MyView(discord.ui.View):
-    @discord.ui.select(
-        placeholder="招待するBotの権限を選択して下さい",
+    def __init__(self):
+        super().__init__(timeout=None)
+        self.add_item(MySelect())
+
+class MySelect(discord.ui.Select):
+    def __init__(self):
+        super().__init__(placeholder="招待するBotの権限を選択して下さい",
         min_values=1,
+        custom_id="bot_invite_myview_select_menu",
         max_values=1,
         options=[
             discord.SelectOption(
@@ -29,26 +34,28 @@ class MyView(discord.ui.View):
             discord.SelectOption(
                 label="権限なし", description="全ての権限をなしにしたURLを生成します。", value="none"
             ),
-        ],
-    )
-    async def select_callback(self, select, i):
+        ])
+
+    async def callback(self, i: discord.Interaction):
         bot_id = db_get(i.message.id)
-        d = select.values[0]
+        d = self.values[0]
         if d == "admin":
-            await i.response.edit_message(
-                f"セレクトメニューをクリックして選択してください\n[Botを招待]({discord.utils.oauth_url(int(bot_id), permissions=discord.Permissions(permissions=discord.Permissions.administrator.flag))})"
+            await i.response.send_message(
+                ephemeral=True,
+                content=f"[Botを招待]({discord.utils.oauth_url(int(bot_id), permissions=discord.Permissions(permissions=discord.Permissions.administrator.flag))})"
             )
         elif d == "all":
-            await i.response.edit_message(
-                f"セレクトメニューをクリックして選択してください\n[Botを招待]({discord.utils.oauth_url(int(bot_id), permissions=discord.Permissions(permissions=discord.Permissions.all()))})"
+            await i.response.send_message(
+                ephemeral=True,
+                content=f"[Botを招待]({discord.utils.oauth_url(int(bot_id), permissions=discord.Permissions(permissions=discord.Permissions.all().value))})"
             )
         elif d == "none":
-            await i.response.edit_message(
-                f"セレクトメニューをクリックして選択してください\n[Botを招待]({discord.utils.oauth_url(int(bot_id))})"
+            await i.response.send_message(
+                ephemeral=True,
+                content=f"[Botを招待]({discord.utils.oauth_url(int(bot_id))})"
             )
         else:
-            await i.response.edit_message("セレクトメニューをクリックして選択してください\n不明なパラメーターが選択されました。")
-
+            await i.response.send_message("不明なパラメーターが選択されました。", ephemeral=True)
 
 class bot_invite(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
@@ -68,7 +75,7 @@ class bot_invite(commands.Cog):
         else:
             await i.response.send_message("セレクトメニューをクリックして選択してください")
             msg = await self.bot.get_channel(i.channel.id).send(view=MyView())
-            db_set(int(msg.id), int(self.bot.id))
+            db_set(int(msg.id), int(self.bot.user.id))
             self.bot.add_view(MyView(), message_id=msg.id)
 
 
