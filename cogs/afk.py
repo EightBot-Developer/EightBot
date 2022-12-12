@@ -3,6 +3,7 @@ from discord import app_commands
 from replit import db
 import discord
 
+
 def afk_set_db(key, data):
     db[f"afk_{key}"] = data
 
