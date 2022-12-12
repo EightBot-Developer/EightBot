@@ -18,12 +18,12 @@ def global_chat(key: int):
         return "False"
 
 
-class global_chat(commands.Cog):
+class global_chat_cog(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot: commands.Bot = bot
 
     @commands.Cog.listener(name="on_message")
-    async def global_chat(self, message: discord.Message):
+    async def global_chat_msg_sys(self, message: discord.Message):
         if message.author.bot:
             return
         if message.channel.type == discord.ChannelType.text:
@@ -73,7 +73,7 @@ class global_chat(commands.Cog):
     @app_commands.command(name="global_chat_join", description="グローバルチャットを有効にします。")
     async def global_set(self, i: discord.Interaction):
         try:
-            if i.channel.channel.type == discord.ChannelType.text:
+            if i.channel.type == discord.ChannelType.text:
                 global_chat_set(i.channel_id, "True")
                 await i.response.send_message("グローバルチャットを有効にしました。", ephemeral=True)
             else:
@@ -83,9 +83,9 @@ class global_chat(commands.Cog):
 
     @app_commands.guild_only()
     @app_commands.command(name="global_chat_leave", description="グローバルチャットを無効にします。")
-    async def global_set(self, i: discord.Interaction):
+    async def global_not_set(self, i: discord.Interaction):
         try:
-            if i.channel.channel.type == discord.ChannelType.text:
+            if i.channel.type == discord.ChannelType.text:
                 global_chat_set(i.channel_id, "False")
                 await i.response.send_message("グローバルチャットを無効にしました。", ephemeral=True)
             else:
@@ -95,4 +95,4 @@ class global_chat(commands.Cog):
 
 
 async def setup(bot: commands.Bot) -> None:
-    await bot.add_cog(global_chat(bot))
+    await bot.add_cog(global_chat_cog(bot))
