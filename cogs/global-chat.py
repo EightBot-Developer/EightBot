@@ -14,6 +14,10 @@ class global_chat_cog(commands.Cog):
             if message.author.bot: 
                 return
             for channel in self.bot.get_all_channels(): 
+                if channel.type != discord.ChannelType.text:
+                    continue
+                if not channel.topic:
+                    continue
                 if channel.topic.startswith("eight-global"):
                     if channel == message.channel: 
                         continue
@@ -51,7 +55,7 @@ class global_chat_cog(commands.Cog):
                         embed.add_field(
                             name='返信', value=reference_value, inline=True)
 
-                        await channel.send(embed=embed)
+                    await channel.send(embed=embed)
             await message.add_reaction('✅')
 
 async def setup(bot: commands.Bot) -> None:
