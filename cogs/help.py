@@ -18,12 +18,11 @@ class Help(commands.Cog):
     @app_commands.command(name="help", description="helpを表示します。")
     async def help(self, i: discord.Interaction, cmd: str = None) -> None:
         if not cmd:
-            he = discord.Embed(title="ページ2", color=discord.Colour.blurple())
-            he.add_field(name="help", value="helpを表示します。")
+            he = discord.Embed(title="ページ2", color=0x3498DB)
             he.set_footer(text=a)
             ee = discord.Embed(
                     title="ページ1",
-                    color=discord.Colour.blurple(),
+                    color=0x3498DB,
                 ).set_footer(text=a)
             num = 0
             for command in self.bot.tree.walk_commands():
@@ -37,20 +36,21 @@ class Help(commands.Cog):
                 he,
             ]
             return await Paginator.Simple().start(i, pages=embeds)
-        elif cmd == "help":
-            return await i.response.send_message(
-                embed=discord.Embed(
-                    title="help",
-                    description="コマンドのヘルプを表示します。",
-                    color=discord.Colour.blurple(),
-                ).add_field(name="使い方", value="`/help コマンド名(任意)`")
+        elif cmd:
+            if self.bot.tree.get_command(cmd):
+                return await i.response.send_message(
+                    embed=discord.Embed(
+                        title=self.bot.tree.get_command(cmd).name,
+                        description=self.bot.tree.get_command(cmd).description,
+                        color=0x3498DB,
+                    )
             )
         else:
             return await i.response.send_message(
                 embed=discord.Embed(
                     title="エラー",
                     description="検索した名前のコマンドは存在しません。",
-                    color=discord.Colour.blurple(),
+                    color=0x3498DB,
                 )
             )
 
