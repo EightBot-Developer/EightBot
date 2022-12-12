@@ -4,16 +4,16 @@ import Paginator
 from discord import app_commands
 
 a = "Tips: /help コマンド名でコマンドを検索できます。"
-
+cmd = []
 
 class Help(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot: commands.Bot = bot
+        for command in self.bot.tree.walk_commands():
+            cmd.append(app_commands.Choice(name=command.name, value=command.name))
 
     @discord.app_commands.choices(
-        cmd=[
-            discord.app_commands.Choice(name="help", value="help"),
-        ]
+        cmd=cmd
     )
     @app_commands.command(name="help", description="helpを表示します。")
     async def help(self, i: discord.Interaction, cmd: str = None) -> None:
