@@ -8,10 +8,12 @@ class global_chat_cog(commands.Cog):
 
     @commands.Cog.listener(name="on_message")
     async def global_chat_msg_sys(self, message: discord.Message):
-        if message.channel.topic: 
+        if message.channel.type != discord.ChannelType.text:
+            return
+        if message.channel.topic:
             if not message.channel.topic.startswith("eight-global"):
                 return
-            if message.author.bot: 
+            if message.author.bot:
                 return
             for channel in self.bot.get_all_channels(): 
                 if channel.type != discord.ChannelType.text:

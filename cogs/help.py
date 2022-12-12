@@ -3,7 +3,7 @@ from discord.ext import commands
 import Paginator
 from discord import app_commands
 
-a = "Tips: `/help コマンド名`でコマンドを検索できます。"
+a = "Tips: /help コマンド名でコマンドを検索できます。"
 
 
 class Help(commands.Cog):
@@ -21,11 +21,19 @@ class Help(commands.Cog):
             he = discord.Embed(title="ページ2", color=discord.Colour.blurple())
             he.add_field(name="help", value="helpを表示します。")
             he.set_footer(text=a)
-            embeds = [
-                discord.Embed(
+            ee = discord.Embed(
                     title="ページ1",
                     color=discord.Colour.blurple(),
-                ).set_footer(text=a),
+                ).set_footer(text=a)
+            num = 0
+            for command in self.bot.tree.walk_commands():
+                num = num + 1
+                if num > 24:
+                    he.add_field(name=command.name, value=command.description)
+                else:
+                    ee.add_field(name=command.name, value=command.description)
+            embeds = [
+                ee,
                 he,
             ]
             return await Paginator.Simple().start(i, pages=embeds)
