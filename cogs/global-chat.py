@@ -18,7 +18,7 @@ def global_chat(key: int):
         return "False"
 
 
-class auto_news(commands.Cog):
+class global_chat(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot: commands.Bot = bot
 
@@ -95,4 +95,4 @@ class auto_news(commands.Cog):
 
 
 async def setup(bot: commands.Bot) -> None:
-    await bot.add_cog(auto_news(bot))
+    await bot.add_cog(global_chat(bot))
