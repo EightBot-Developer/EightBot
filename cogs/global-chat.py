@@ -66,7 +66,7 @@ class global_chat_cog(commands.Cog):
                         embed.add_field(
                             name='返信', value=reference_value, inline=True)
 
-                    await message.send(embed=embed)
+                    await message.channel.send(embed=embed)
             await message.add_reaction('✅')
 
     @app_commands.guild_only()
