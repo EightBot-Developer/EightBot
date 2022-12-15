@@ -2,7 +2,7 @@ from discord.ext import commands
 from discord import app_commands
 from replit import db
 import discord
-from color import color
+
 
 def afk_set_db(key, data):
     db[f"afk_{key}"] = data
@@ -25,7 +25,7 @@ class afk(commands.Cog):
                 embed=discord.Embed(
                     title="<:check_mark:985366958537076766> : 成功",
                     description="afkをセットしました。",
-                    color=color,
+                    color=0x3498DB,
                 ),
                 ephemeral=True,
             )
@@ -34,7 +34,7 @@ class afk(commands.Cog):
                 embed=discord.Embed(
                     title="<:error_mark:985366305156767794> : 失敗",
                     description="何らかのエラーが発生しました。",
-                    color=color,
+                    color=0x3498DB,
                 ),
                 ephemeral=True,
             )
@@ -47,7 +47,7 @@ class afk(commands.Cog):
                     embed=discord.Embed(
                         title="<:check_mark:985366958537076766> : 成功",
                         description="afkを解除しました。",
-                        color=color,
+                        color=0x3498DB,
                     ),
                     ephemeral=True,
                 )
@@ -56,7 +56,7 @@ class afk(commands.Cog):
                 embed=discord.Embed(
                     title="<:error_mark:985366305156767794> : 失敗",
                     description="何らかのエラーが発生しました。",
-                    color=color,
+                    color=0x3498DB,
                 ),
                 ephemeral=True,
             )

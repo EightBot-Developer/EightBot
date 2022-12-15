@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-from discord import app_commands
 from replit import db
 
 
@@ -9,15 +8,22 @@ def bot_command_count_get(data):
 
 
 def bot_command_count(data):
-    db[f"bot_command_{data}_count_db"] = int(bot_command_count_get()) + 1
+    try:
+        db[f"bot_command_{data}_count_db"] = int(bot_command_count_get(data)) + 1
+    except KeyError:
+        db[f"bot_command_{data}_count_db"] = 0 + 1
 
 
 def bot_command_all_count_db_get():
-    return db[f"bot_command_all_count_db"]
+    return db["bot_command_all_count_db"]
 
 
 def bot_command_count_p1():
-    db[f"bot_command_all_count_db"] = int(bot_command_all_count_db_get()) + 1
+    try:
+        db["bot_command_all_count_db"] = int(bot_command_all_count_db_get()) + 1
+        return
+    except KeyError:
+        db["bot_command_all_count_db"] = 0 + 1
 
 
 class bot_process(commands.Cog):
@@ -28,8 +34,8 @@ class bot_process(commands.Cog):
     async def interaction(self, i: discord.Interaction):
         if i.type == discord.InteractionType.application_command:
             bot_command_count_p1()
-            if self.bot.tree.get_command(i.command.name):
-                bot_command_count(i.command.name)
+            if i.command:
+                bot_command_count(data=i.command.name)
             else:
                 return
 
