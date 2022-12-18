@@ -18,10 +18,10 @@ class ban_member(commands.Cog):
             send_content = "".join(m)
         elif len(m) == 0:
             send_content = "Banされたユーザーはいません。"
-        try:
-            await i.response.send_message(embed=discord.Embed(title="Banされたユーザー", description=send_content, color=0x3498DB), ephemeral=True)
-        except:
-            await i.response.send_message(embed=discord.Embed(title="Banされたユーザー", description="取得できませんでした。", color=0x3498DB), ephemeral=True)
+        embed = discord.Embed(
+            title="Banされたユーザー", description=send_content, color=0x3498DB
+        )
+        await i.response.send_message(embed=embed, ephemeral=True)
 
 
 async def setup(bot: commands.Bot) -> None:
