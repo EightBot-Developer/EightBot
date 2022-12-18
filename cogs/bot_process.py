@@ -3,24 +3,24 @@ from discord.ext import commands
 from replit import db
 
 
-def bot_command_count_get(data):
+def command_get_count(data):
     return db[f"bot_command_{data}_count_db"]
 
 
 def bot_command_count(data):
     try:
-        db[f"bot_command_{data}_count_db"] = int(bot_command_count_get(data)) + 1
+        db[f"bot_command_{data}_count_db"] = int(command_get_count(data)) + 1
     except KeyError:
         db[f"bot_command_{data}_count_db"] = 0 + 1
 
 
-def bot_command_all_count_db_get():
+def bot_command_count_all():
     return db["bot_command_all_count_db"]
 
 
 def bot_command_count_p1():
     try:
-        db["bot_command_all_count_db"] = int(bot_command_all_count_db_get()) + 1
+        db["bot_command_all_count_db"] = int(bot_command_count_all()) + 1
         return
     except KeyError:
         db["bot_command_all_count_db"] = 0 + 1
