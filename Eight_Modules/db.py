@@ -1,5 +1,6 @@
 import aiofiles
 import json
+import os
 
 not_str_msg = 'The argument "database_name" accepts only type "str".'
 
@@ -18,12 +19,15 @@ class Database:
 
     async def set(self, name, value) -> None:
         file = f"./data/{name}/{self.database_name}.json"
-        async with aiofiles.open(file, "a") as f:
+        async with aiofiles.open(file, "w") as f:
             f.write(json.dumps({value: value}))
         return json.dumps({value: value})
 
     async def get(self, name) -> None:
         file = f"./data/{name}/{self.database_name}.json"
-        async with aiofiles.open(file, "r", encoding="utf-8") as f:
-            data = dict(await f.read())
-        return data
+        if os.path.isfile(file):
+            async with aiofiles.open(file, "r", encoding="utf-8") as f:
+                data = dict(await f.read())
+            return data
+        else:
+            return None
