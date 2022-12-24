@@ -2,9 +2,10 @@
   "name": "eightbot",
   "version": "2.2.0",
   "description": "Discord BOT",
-  "main": "index.js",
+  "main": "index.ts",
   "repository": "https://github.com/EightBot-Developer/EightBot",
   "author": "gx1285",
   "license": "MIT",
+  "type": "module",
   "private": true
 }
