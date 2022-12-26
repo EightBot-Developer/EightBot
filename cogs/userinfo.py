@@ -12,6 +12,7 @@ class Userinfo(commands.Cog):
     @app_commands.command(name="userinfo", description="指定したユーザーの情報を返します。")
     async def userinfo(self, i: discord.Interaction, user: discord.User):
         await i.response.send_message("利用できません。")
+        # TODO
 
 
 async def setup(bot: commands.Bot) -> None:
