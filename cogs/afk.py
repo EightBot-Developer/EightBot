@@ -44,13 +44,13 @@ class afk(commands.Cog):
         try:
             afk_set_db(int(i.user.id), False)
             await i.response.send_message(
-                    embed=discord.Embed(
-                        title="<:check_mark:985366958537076766> : 成功",
-                        description="afkを解除しました。",
-                        color=0x3498DB,
-                    ),
-                    ephemeral=True,
-                )
+                embed=discord.Embed(
+                    title="<:check_mark:985366958537076766> : 成功",
+                    description="afkを解除しました。",
+                    color=0x3498DB,
+                ),
+                ephemeral=True,
+            )
         except:
             await i.response.send_message(
                 embed=discord.Embed(

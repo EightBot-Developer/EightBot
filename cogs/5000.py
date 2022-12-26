@@ -61,10 +61,10 @@ class gosentyouen(commands.Cog):
         noalpha: str,
         rainbow: str,
     ):
-        embed = discord.Embed(title="5000兆円ほしい!!", color=0x3498DB).set_image(url=f"https://gsapi.cbrx.io/image?top={urllib.parse.quote(top)}&bottom={urllib.parse.quote(bottom)}&type={urllib.parse.quote(type)}&q={urllib.parse.quote(quality)}&hoshii={urllib.parse.quote(hoshii)}&noalpha={urllib.parse.quote(noalpha)}&rainbow={urllib.parse.quote(rainbow)}")
-        await i.response.send_message(
-            embed=embed
+        embed = discord.Embed(title="5000兆円ほしい!!", color=0x3498DB).set_image(
+            url=f"https://gsapi.cbrx.io/image?top={urllib.parse.quote(top)}&bottom={urllib.parse.quote(bottom)}&type={urllib.parse.quote(type)}&q={urllib.parse.quote(quality)}&hoshii={urllib.parse.quote(hoshii)}&noalpha={urllib.parse.quote(noalpha)}&rainbow={urllib.parse.quote(rainbow)}"
         )
+        await i.response.send_message(embed=embed)
 
 
 async def setup(bot: commands.Bot) -> None:

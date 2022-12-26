@@ -19,9 +19,19 @@ class ban_member(commands.Cog):
         elif len(m) == 0:
             send_content = "Banされたユーザーはいません。"
         try:
-            await i.response.send_message(embed=discord.Embed(title="Banされたユーザー", description=send_content, color=0x3498DB), ephemeral=True)
+            await i.response.send_message(
+                embed=discord.Embed(
+                    title="Banされたユーザー", description=send_content, color=0x3498DB
+                ),
+                ephemeral=True,
+            )
         except:
-            await i.response.send_message(embed=discord.Embed(title="Banされたユーザー", description="取得できませんでした。", color=0x3498DB), ephemeral=True)
+            await i.response.send_message(
+                embed=discord.Embed(
+                    title="Banされたユーザー", description="取得できませんでした。", color=0x3498DB
+                ),
+                ephemeral=True,
+            )
 
 
 async def setup(bot: commands.Bot) -> None:
