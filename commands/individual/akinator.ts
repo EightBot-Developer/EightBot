@@ -14,12 +14,6 @@ export class PingCommand extends Command {
       builder
         .setName("akinator")
         .setDescription("アキネーターをプレイすることができます。")
-        .addStringOption((option) =>
-          option
-            .setName("")
-            .setDescription("選択肢の数を入力してください。")
-            .setRequired(true)
-        )
     );
   }
 
