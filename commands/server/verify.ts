@@ -1,3 +1,4 @@
+/*
 import { Command, ChatInputCommand } from "@sapphire/framework";
 
 export class Verify extends Command {
@@ -12,12 +13,10 @@ export class Verify extends Command {
       builder
         .setName("verify")
         .setDescription("Returns the current Ping value of the bot.")
-        .setDescriptionLocalizations({
-          ja: "Botの現在のPing値を返します。",
-          "en-US": "Returns the current Ping value of the bot.",
-        })
     );
   }
 
   public async chatInputRun(interaction: Command.ChatInputInteraction) {}
 }
+
+*/
