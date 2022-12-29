@@ -10,13 +10,7 @@ export class PingCommand extends Command {
     registry: ChatInputCommand.Registry
   ) {
     registry.registerChatInputCommand((builder) =>
-      builder
-        .setName("ping")
-        .setDescription("Returns the current Ping value of the bot.")
-        .setDescriptionLocalizations({
-          ja: "Botの現在のPing値を返します。",
-          "en-US": "Returns the current Ping value of the bot.",
-        })
+      builder.setName("ping").setDescription("Botの現在のPing値を返します。")
     );
   }
 
