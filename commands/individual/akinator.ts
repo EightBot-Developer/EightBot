@@ -1,6 +1,4 @@
-import { isMessageInstance } from "@sapphire/discord.js-utilities";
 import { Command, ChatInputCommand } from "@sapphire/framework";
-import { MessageEmbed } from "discord.js";
 import akinator from "discord.js-akinator";
 export class PingCommand extends Command {
   public constructor(context: Command.Context, options: Command.Options) {
