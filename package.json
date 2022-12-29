@@ -15,6 +15,7 @@
     "@types/node": "^18.11.17",
     "discord-api-types": "0.33.5",
     "discord.js": "13.x",
+    "discord.js-akinator": "3.4.5",
     "dotenv": "^16.0.3",
     "keyv": "^4.5.2",
     "pify": "^6.1.0",
