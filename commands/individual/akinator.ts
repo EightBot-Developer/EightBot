@@ -1,6 +1,6 @@
 import { Command, ChatInputCommand } from "@sapphire/framework";
 import akinator from "discord.js-akinator";
-export class PingCommand extends Command {
+export class Akinator extends Command {
   public constructor(context: Command.Context, options: Command.Options) {
     super(context, { ...options });
   }

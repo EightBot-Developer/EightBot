@@ -5,7 +5,7 @@ import {
   TextInputComponent,
   ModalActionRowComponent,
 } from "discord.js";
-export class PingCommand extends Command {
+export class Poll extends Command {
   public constructor(context: Command.Context, options: Command.Options) {
     super(context, { ...options });
   }

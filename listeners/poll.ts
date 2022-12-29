@@ -9,7 +9,7 @@ import {
 } from "discord.js";
 import Keyv from "keyv";
 
-export class Poll_modal extends Listener {
+export class PollModal extends Listener {
   poll: Keyv;
   public constructor(context: Listener.Context, options: Listener.Options) {
     super(context, {

@@ -2,7 +2,7 @@ import { Command } from "@sapphire/framework";
 import { ApplicationCommandType } from "discord-api-types/v9";
 import { MessageEmbed } from "discord.js";
 import Keyv from "keyv";
-export class PingCommand extends Command {
+export class PollStop extends Command {
   poll: Keyv;
   public constructor(context: Command.Context, options: Command.Options) {
     super(context, { ...options });

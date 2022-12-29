@@ -1,6 +1,6 @@
 import { Command, ChatInputCommand } from "@sapphire/framework";
 
-export class PingCommand extends Command {
+export class Verify extends Command {
   public constructor(context: Command.Context, options: Command.Options) {
     super(context, { ...options });
   }

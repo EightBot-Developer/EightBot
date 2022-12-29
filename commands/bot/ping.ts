@@ -1,7 +1,7 @@
 import { isMessageInstance } from "@sapphire/discord.js-utilities";
 import { Command, ChatInputCommand } from "@sapphire/framework";
 import { MessageEmbed } from "discord.js";
-export class PingCommand extends Command {
+export class Ping extends Command {
   public constructor(context: Command.Context, options: Command.Options) {
     super(context, { ...options });
   }
