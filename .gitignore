@@ -4,3 +4,4 @@ node_modules/
 .env
 # sqlite file
 db.sqlite
+verify.sqlite
