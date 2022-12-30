@@ -25,7 +25,6 @@ export class PollModal extends Listener {
   public async run(interaction: Interaction<CacheType>) {
     if (!interaction.isButton()) return;
     if (interaction.customId === "verify_2") {
-      console.log("aaqa");
       if (
         interaction.guild?.members.cache
           .get(interaction.member?.user.id || "")
@@ -35,7 +34,6 @@ export class PollModal extends Listener {
           content: "認証に成功しています。",
           ephemeral: true,
         });
-      console.log("aa");
       const n = String(Random_num(999));
       const modal = new Modal().setCustomId(`verify_2_${n}`).setTitle("認証");
       modal.addComponents(
