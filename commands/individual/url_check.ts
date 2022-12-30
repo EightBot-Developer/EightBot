@@ -23,6 +23,7 @@ export class UrlCheck extends Command {
 
   public async chatInputRun(interaction: Command.ChatInputInteraction) {
     try {
+      await interaction.deferReply();
       const url = interaction.options.getString("url") || "";
       await fetch(
         `https://safeweb.norton.com/report/show?url=${encodeURI(url)}&ulang=jpn`
@@ -31,7 +32,7 @@ export class UrlCheck extends Command {
         .then(async (norton) => {
           //NortonSafeWebにアクセス
           if (norton.indexOf("安全性") != -1) {
-            await interaction.reply({
+            await interaction.editReply({
               embeds: [
                 {
                   title: "結果は安全です。",
@@ -44,7 +45,7 @@ export class UrlCheck extends Command {
               ],
             });
           } else if (norton.indexOf("［注意］") != -1) {
-            await interaction.reply({
+            await interaction.editReply({
               embeds: [
                 {
                   title: "結果は注意です。",
@@ -57,7 +58,7 @@ export class UrlCheck extends Command {
               ],
             });
           } else if (norton.indexOf("警告") != -1) {
-            await interaction.reply({
+            await interaction.editReply({
               embeds: [
                 {
                   title: "結果は警告です。",
@@ -70,7 +71,7 @@ export class UrlCheck extends Command {
               ],
             });
           } else {
-            await interaction.reply({
+            await interaction.editReply({
               embeds: [
                 {
                   title: "結果は未評価です。",
@@ -85,7 +86,7 @@ export class UrlCheck extends Command {
           }
         });
     } catch {
-      interaction.reply("解析中にエラーが発生しました。");
+      await interaction.editReply("解析中にエラーが発生しました。");
     }
   }
 }
