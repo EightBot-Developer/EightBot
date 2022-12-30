@@ -42,6 +42,12 @@ export class Ping extends Command {
       });
     }
 
-    return interaction.editReply("Failed to retrieve ping :(");
+    return interaction.editReply({
+      embeds: [
+        new MessageEmbed()
+          .setDescription("**Pingの取得に失敗しました。**")
+          .setColor(0x3498db),
+      ],
+    });
   }
 }
