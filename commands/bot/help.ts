@@ -24,7 +24,10 @@ export class help extends Command {
     let num: number = 0;
     for (const cmd of app) {
       num = num + 1;
-      embed.addFields({ name: cmd.name, value: cmd.description || "説明はありません。"});
+      embed.addFields({
+        name: cmd.name,
+        value: cmd.description || "説明はありません。",
+      });
     }
     await interaction.reply({ embeds: [embed] });
   }
