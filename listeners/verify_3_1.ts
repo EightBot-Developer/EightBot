@@ -11,7 +11,7 @@ import Keyv from "keyv";
 function Random_num(max: number) {
   return Math.floor(Math.random() * max);
 }
-export class Verify21 extends Listener {
+export class Verify31 extends Listener {
   verify: Keyv;
   public constructor(context: Listener.Context, options: Listener.Options) {
     super(context, {
@@ -19,13 +19,13 @@ export class Verify21 extends Listener {
       once: false,
       event: Events.InteractionCreate,
     });
-    this.verify = new Keyv("sqlite://db/verify.sqlite", { table: "type2" });
+    this.verify = new Keyv("sqlite://db/verify.sqlite", { table: "type3" });
     this.verify.on("error", (e) => this.container.logger.info(e));
   }
   public async run(interaction: Interaction<CacheType>) {
     if (!interaction.isModalSubmit()) return;
-    if (interaction.customId.startsWith("verify_2_")) {
-      const a = interaction.customId.replace("verify_2_", "");
+    if (interaction.customId.startsWith("verify_3_")) {
+      const a = interaction.customId.replace("verify_3_", "");
       if (interaction.fields.getTextInputValue("id") === a) {
         await interaction.guild?.members.cache
           .get(interaction.user.id)

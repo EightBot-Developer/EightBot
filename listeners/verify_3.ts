@@ -11,7 +11,7 @@ import Keyv from "keyv";
 function Random_num(max: number) {
   return Math.floor(Math.random() * max);
 }
-export class Verify2 extends Listener {
+export class Verify3 extends Listener {
   verify: Keyv;
   public constructor(context: Listener.Context, options: Listener.Options) {
     super(context, {
@@ -19,12 +19,12 @@ export class Verify2 extends Listener {
       once: false,
       event: Events.InteractionCreate,
     });
-    this.verify = new Keyv("sqlite://db/verify.sqlite", { table: "type2" });
+    this.verify = new Keyv("sqlite://db/verify.sqlite", { table: "type3" });
     this.verify.on("error", (e) => this.container.logger.info(e));
   }
   public async run(interaction: Interaction<CacheType>) {
     if (!interaction.isButton()) return;
-    if (interaction.customId === "verify_2") {
+    if (interaction.customId === "verify_3") {
       if (
         interaction.guild?.members.cache
           .get(interaction.member?.user.id || "")
@@ -34,13 +34,15 @@ export class Verify2 extends Listener {
           content: "認証に成功しています。",
           ephemeral: true,
         });
-      const n = String(Random_num(999));
-      const modal = new Modal().setCustomId(`verify_2_${n}`).setTitle("認証");
+      const c = Random_num(901);
+      const c3 = Random_num(10);
+      const n = String(c + c3);
+      const modal = new Modal().setCustomId(`verify_3_${n}`).setTitle("認証");
       modal.addComponents(
         new MessageActionRow<ModalActionRowComponent>().addComponents(
           new TextInputComponent()
             .setCustomId("id")
-            .setLabel(`${n}←この数字を入力してください。`)
+            .setLabel(`${c} + ${c3}の答えは？`)
             .setStyle("SHORT")
             .setMaxLength(3)
         )
