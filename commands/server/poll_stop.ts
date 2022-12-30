@@ -38,6 +38,23 @@ export class PollStop extends Command {
               .setColor(0x3498db),
           ],
         });
+      } else {
+        await interaction.reply({
+          embeds: [
+            new MessageEmbed()
+              .setTitle(
+                interaction.targetMessage.embeds[0].title + "の集計結果"
+              )
+              .setDescription(
+                `1番: ${await this.poll.get(
+                  `${interaction.targetMessage.id}_1`
+                )}票\n2番: ${await this.poll.get(
+                  `${interaction.targetMessage.id}_2`
+                )}票`
+              )
+              .setColor(0x3498db),
+          ],
+        });
       }
     } else {
       return await interaction.reply({
