@@ -16,6 +16,11 @@ export class Akinator extends Command {
   }
 
   public async chatInputRun(interaction: Command.ChatInputInteraction) {
+    if (!interaction.guild)
+      return await interaction.reply({
+        content: "DMではアキネーターをプレイできません。",
+        ephemeral: true,
+      });
     akinator(interaction, {
       language: "ja",
       childMode: false,
