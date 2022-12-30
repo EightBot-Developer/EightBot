@@ -88,6 +88,35 @@ export class Verify extends Command {
         `${msg?.id}`,
         `${interaction.options.getRole("role")?.id}`
       );
+    } else if (interaction.options.getString("type") === "2") {
+      await interaction.reply({
+        content: "認証パネルを生成しました。",
+        ephemeral: true,
+      });
+      const embed = new MessageEmbed()
+        .setTitle(interaction.options.getString("title") || "")
+        .setDescription(interaction.options.getString("description") || "")
+        .setFields({
+          name: "付与するロール",
+          value: `<@&${interaction.options.getRole("role")?.id}>`,
+        })
+        .setColor(0x3498db);
+      const msg = await interaction.channel?.send({
+        embeds: [embed],
+        components: [
+          new MessageActionRow().addComponents(
+            new MessageButton()
+              .setEmoji("✅")
+              .setLabel("認証")
+              .setStyle("SUCCESS")
+              .setCustomId("verify_2")
+          ),
+        ],
+      });
+      await this.verify2.set(
+        `${msg?.id}`,
+        `${interaction.options.getRole("role")?.id}`
+      );
     }
   }
 }
