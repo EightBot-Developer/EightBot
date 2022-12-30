@@ -5,7 +5,6 @@ export class Verify extends Command {
   verify: Keyv;
   verify2: Keyv;
   verify3: Keyv;
-  verify4: Keyv;
   public constructor(context: Command.Context, options: Command.Options) {
     super(context, { ...options });
     this.verify = new Keyv("sqlite://db/verify.sqlite", { table: "type1" });
@@ -14,8 +13,6 @@ export class Verify extends Command {
     this.verify2.on("error", (e) => this.container.logger.info(e));
     this.verify3 = new Keyv("sqlite://db/verify.sqlite", { table: "type3" });
     this.verify3.on("error", (e) => this.container.logger.info(e));
-    this.verify4 = new Keyv("sqlite://db/verify.sqlite", { table: "type4" });
-    this.verify4.on("error", (e) => this.container.logger.info(e));
   }
 
   public override registerApplicationCommands(
@@ -30,8 +27,7 @@ export class Verify extends Command {
             .addChoices(
               { name: "1クリック認証", value: "1" },
               { name: "数字認証", value: "2" },
-              { name: "足し算認証", value: "3" },
-              { name: "合言葉認証", value: "4" }
+              { name: "足し算認証", value: "3" }
             )
             .setRequired(true)
             .setName("type")
