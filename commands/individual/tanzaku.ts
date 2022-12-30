@@ -10,7 +10,7 @@ export class Tanzaku extends Command {
     registry.registerChatInputCommand((builder) =>
       builder
         .setName("tanzaku")
-        .setDescription("テキストの間に空白を入れます。")
+        .setDescription("短冊を生成します。")
         .addStringOption((input) =>
           input.setName("テキスト").setDescription("テキスト").setRequired(true)
         )
