@@ -40,7 +40,7 @@ export class UrlCheck extends Command {
                   footer: {
                     text: "Powered by Norton Safeweb",
                   },
-                  color: 0xffd700,
+                  color: 0x00ff00,
                 },
               ],
             });
@@ -53,7 +53,7 @@ export class UrlCheck extends Command {
                   footer: {
                     text: "Powered by Norton Safeweb",
                   },
-                  color: 0xffd700,
+                  color: 0xf5dd42,
                 },
               ],
             });
@@ -66,7 +66,7 @@ export class UrlCheck extends Command {
                   footer: {
                     text: "Powered by Norton Safeweb",
                   },
-                  color: 0xffd700,
+                  color: 0xff0000,
                 },
               ],
             });
@@ -79,7 +79,7 @@ export class UrlCheck extends Command {
                   footer: {
                     text: "Powered by Norton Safeweb",
                   },
-                  color: 0xffd700,
+                  color: 0x546e7a,
                 },
               ],
             });
