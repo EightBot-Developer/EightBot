@@ -1,7 +1,9 @@
 import { SapphireClient } from "@sapphire/framework";
 import { Intents } from "discord.js";
 import { config } from "dotenv";
-const client = new SapphireClient({ intents: Intents.FLAGS.GUILDS });
+const client = new SapphireClient({
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS],
+});
 // replitで動かす場合は6行目を消してください。
 config();
 if (process.env.test_mode === "y") {

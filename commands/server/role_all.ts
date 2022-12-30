@@ -1,4 +1,5 @@
 import { Command, ChatInputCommand } from "@sapphire/framework";
+import { Role } from "discord.js";
 export class TextSpace extends Command {
   public constructor(context: Command.Context, options: Command.Options) {
     super(context, { ...options });
@@ -62,37 +63,37 @@ export class TextSpace extends Command {
         content: "ここはサーバーではありません。",
         ephemeral: true,
       });
+    await interaction.deferReply();
+
     if (interaction.options.getSubcommand() === "add") {
       const role = interaction.options.getRole("ロール");
-      interaction.guild.members.fetch().then((members) =>
+      await interaction.guild.members.fetch().then((members) =>
         Promise.all(members.map((member) => member.roles.add(`${role?.id}`)))
           .then(async () => {
-            return await interaction.reply({
+            await interaction.editReply({
               content: "ロールの付与に成功しました。",
-              ephemeral: true,
             });
           })
-          .catch(async () => {
-            return await interaction.reply({
+          .catch(async (e) => {
+            console.log(e);
+            return await interaction.editReply({
               content: "ロールの付与に失敗しました。",
-              ephemeral: true,
             });
           })
       );
     } else if (interaction.options.getSubcommand() === "remove") {
       const role = interaction.options.getRole("ロール");
-      interaction.guild.members.fetch().then((members) =>
+      await interaction.guild.members.fetch().then((members) =>
         Promise.all(members.map((member) => member.roles.remove(`${role?.id}`)))
           .then(async () => {
-            return await interaction.reply({
+            return await interaction.editReply({
               content: "ロールの剥奪に成功しました。",
-              ephemeral: true,
             });
           })
-          .catch(async () => {
-            return await interaction.reply({
-              content: "ロールの剥奪に失敗しました。",
-              ephemeral: true,
+          .catch(async (e) => {
+            console.log(e);
+            return await interaction.editReply({
+              content: "ロールの付与に失敗しました。",
             });
           })
       );
