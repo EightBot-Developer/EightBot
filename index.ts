@@ -10,6 +10,10 @@ var server = http.createServer(function (request, response) {
 
 const client = new SapphireClient({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS],
+  presence: {
+    status: "dnd",
+    activities: [{ name: "起動中", type: "PLAYING" }],
+  },
 });
 // replitで動かす場合は6行目を消してください。
 config();
