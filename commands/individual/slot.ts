@@ -30,23 +30,23 @@ export class Slot extends Command {
       "🍈",
       "🍓",
     ];
-    var random = Math.floor(Math.random() * arr.length);
-    var result = arr[random];
-    var random2 = Math.floor(Math.random() * arr.length);
-    var result2 = arr[random2];
-    var random3 = Math.floor(Math.random() * arr.length);
-    var result3 = arr[random3];
+    let random = Math.floor(Math.random() * arr.length);
+    let result = arr[random];
+    let random2 = Math.floor(Math.random() * arr.length);
+    let result2 = arr[random2];
+    let random3 = Math.floor(Math.random() * arr.length);
+    let result3 = arr[random3];
     await interaction.reply(result + result2 + result3);
     let x = 0;
     while (x < 10) {
       x++;
       await setTimeout(1000);
-      var random = Math.floor(Math.random() * arr.length);
-      var result = arr[random];
-      var random2 = Math.floor(Math.random() * arr.length);
-      var result2 = arr[random2];
-      var random3 = Math.floor(Math.random() * arr.length);
-      var result3 = arr[random3];
+      let random = Math.floor(Math.random() * arr.length);
+      let result = arr[random];
+      let random2 = Math.floor(Math.random() * arr.length);
+      let result2 = arr[random2];
+      let random3 = Math.floor(Math.random() * arr.length);
+      let result3 = arr[random3];
       await interaction.editReply(result + result2 + result3);
       if (x == 10) {
         if (result === result2 && result2 === result3) {
