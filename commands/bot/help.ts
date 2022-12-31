@@ -1,4 +1,3 @@
-import { isMessageInstance } from "@sapphire/discord.js-utilities";
 import { Command, ChatInputCommand } from "@sapphire/framework";
 import { MessageEmbed } from "discord.js";
 export class help extends Command {
