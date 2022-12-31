@@ -1,5 +1,5 @@
 import { Command, ChatInputCommand } from "@sapphire/framework";
-import { Role } from "discord.js";
+
 export class RoleAll extends Command {
   public constructor(context: Command.Context, options: Command.Options) {
     super(context, { ...options });
