@@ -22,16 +22,6 @@ export class RoleAll extends Command {
                 .setDescription("付与するロール")
                 .setRequired(true)
             )
-            .addStringOption((input) =>
-              input
-                .setName("botにも付与するか")
-                .setDescription("botにも付与するか")
-                .addChoices(
-                  { name: "はい", value: "true" },
-                  { name: "いいえ", value: "false" }
-                )
-                .setRequired(true)
-            )
         )
         .addSubcommand((input) =>
           input
@@ -41,16 +31,6 @@ export class RoleAll extends Command {
               input
                 .setName("ロール")
                 .setDescription("はく奪するロール")
-                .setRequired(true)
-            )
-            .addStringOption((input) =>
-              input
-                .setName("botにもはく奪するか")
-                .setDescription("botにもはく奪するか")
-                .addChoices(
-                  { name: "はい", value: "true" },
-                  { name: "いいえ", value: "false" }
-                )
                 .setRequired(true)
             )
         )
