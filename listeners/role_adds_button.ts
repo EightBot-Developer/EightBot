@@ -48,6 +48,7 @@ export class RoleAddsButton extends Listener {
       await interaction.reply({
         content: "何番目のロールが欲しいですか？選んでください。",
         components: [new MessageActionRow().addComponents(row)],
+        ephemeral: true,
       });
       const collector = new InteractionCollector(this.container.client, {
         filter: (interaction) =>
@@ -74,11 +75,14 @@ export class RoleAddsButton extends Listener {
             .catch(async () => {
               if (i.deferred || i.replied) {
                 await i.followUp({
-                  content: "付与できました。",
+                  content: "付与できませんでした。",
                   ephemeral: true,
                 });
               } else {
-                await i.reply({ content: "付与できました。", ephemeral: true });
+                await i.reply({
+                  content: "付与できませんでした。",
+                  ephemeral: true,
+                });
               }
             });
         }
