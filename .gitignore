@@ -4,3 +4,5 @@ node_modules/
 .env
 # sqlite files
 *.sqlite
+# emoji etc image folder
+emoji/
