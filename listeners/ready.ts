@@ -14,11 +14,7 @@ export class ReadyListener extends Listener {
       status: "idle",
       activities: [
         {
-          name: `/help ${
-            this.container.client.guilds.cache.size
-          } server ${this.container.client.guilds.cache
-            .map((guild) => guild.memberCount)
-            .reduce((p, c) => p + c)} user`,
+          name: `/help | ${this.container.client.guilds.cache.size} server`,
           type: "PLAYING",
         },
       ],
@@ -29,11 +25,7 @@ export class ReadyListener extends Listener {
         status: "idle",
         activities: [
           {
-            name: `/help ${
-              this.container.client.guilds.cache.size
-            } server ${this.container.client.guilds.cache
-              .map((guild) => guild.memberCount)
-              .reduce((p, c) => p + c)} user`,
+            name: `/help | ${this.container.client.guilds.cache.size} server`,
             type: "PLAYING",
           },
         ],
