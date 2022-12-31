@@ -18,9 +18,9 @@ export class ReadyListener extends Listener {
           {
             name: `/help ${
               this.container.client.guilds.cache.size
-            }Server ${this.container.client.guilds.cache
+            } server ${this.container.client.guilds.cache
               .map((guild) => guild.memberCount)
-              .reduce((p, c) => p + c)}User`,
+              .reduce((p, c) => p + c)} user`,
             type: "PLAYING",
           },
         ],
