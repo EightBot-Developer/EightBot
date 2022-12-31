@@ -75,7 +75,7 @@ export class PollStop extends Command {
       }
     } else {
       return await interaction.reply({
-        content: "このメッセージはEightBot簡易投票ではありません。",
+        content: "このメッセージはEightBot簡易投票ではないか、もう集計されています。",
         ephemeral: true,
       });
     }
