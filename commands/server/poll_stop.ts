@@ -18,7 +18,24 @@ export class PollStop extends Command {
 
   public async contextMenuRun(interaction: Command.ContextMenuInteraction) {
     if (!interaction.isMessageContextMenu()) return;
-    if (await this.poll.get(`${interaction.targetMessage.id}`)) {
+    if (
+      interaction.targetMessage.embeds[0].footer?.text.replace(
+        "管理id: ",
+        ""
+      ) !== interaction.user.id
+    )
+      return await interaction.reply({
+        content: "あなたは投票の作成者ではありません。",
+        ephemeral: true,
+      });
+    await this.poll.set(
+      `${interaction.targetMessage.id}`,
+      "notnotnotnotnotnot"
+    );
+    if (
+      (await this.poll.get(`${interaction.targetMessage.id}`)) ===
+      "notnotnotnotnotnot"
+    ) {
       if (await this.poll.get(`${interaction.targetMessage.id}_3`)) {
         await interaction.reply({
           embeds: [

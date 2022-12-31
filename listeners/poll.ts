@@ -53,6 +53,7 @@ export class PollModal extends Listener {
               "2"
             )}\n3: ${interaction.fields.getTextInputValue("3")}`
           )
+          .setFooter({ text: "管理id: " + interaction.user.id })
           .setColor(0x3498db);
 
         await interaction.reply({

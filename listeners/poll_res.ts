@@ -28,7 +28,7 @@ export class PollResponse extends Listener {
         await interaction.reply({ content: "投票しました。", ephemeral: true });
       }
     } else if (interaction.customId === "2") {
-      if (!(await this.poll.get(`${interaction.message.id}`))) {
+      if (await this.poll.get(`${interaction.message.id}`) === "notnotnotnotnotnot") {
         return await interaction.reply({
           content: "投票は終了しました。",
           ephemeral: true,
