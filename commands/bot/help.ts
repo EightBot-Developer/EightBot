@@ -23,6 +23,7 @@ export class help extends Command {
     let num: number = 0;
     for (const cmd of app) {
       num = num + 1;
+      if (num > 25) continue;
       embed.addFields({
         name: cmd.name,
         value: cmd.description || "説明はありません。",
