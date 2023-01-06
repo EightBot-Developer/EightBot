@@ -5,29 +5,21 @@
 
 ## この Bot を動かす。
 
-### 1. node.js をインストール
+### 1. deno をインストール
 
-[nodejs.org](https://nodejs.org/)を開いて LTS をダウンロードして、インストーラを起動させ、指示に従ってインストールしてください。
+[こちら](https://deno.land/manual/getting_started/installation)を参考にインストールしてください。
 
-### 2. yarn をインストール
-
-`npm install -g yarn`をターミナルなどで実行してください。<br>
-
-### 3. clone する
+### 2. clone する
 
 `git clone https://github.com/EightBot-Developer/EightBot.git`をターミナルなどで実行してください。
 
-### 4. env ファイルを作る
+### 3. env ファイルを作る
 
-.env を作成して、[env.md](https://github.com/EightBot-Developer/EightBot/blob/main/env.md)を見て key を設定してください。
+.env を作成して、[env.md](https://github.com/EightBot-Developer/EightBot/blob/2.4/env/README.md)を見て key を設定してください。
 
-### 5. 依存関係をインストール
+### 4. 実行する
 
-`yarn`をターミナルなどで実行してください。
-
-### 6. 実行する
-
-`yarn start`をターミナルなどで実行してください。
+`deno task start`をターミナルなどで実行してください。
 
 ## ライセンス
 
