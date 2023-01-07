@@ -8,4 +8,4 @@ secret の key の説明です。
 
 ## CLIENT_ID
 
-本番環境の DiscordBot Client IDを入れてください。
+本番環境の DiscordBot Client ID を入れてください。
