@@ -1,32 +1,55 @@
-import { REST, Routes, SlashCommandBuilder } from "./deps/deps.ts";
+import { Routes } from "./deps/deps.ts";
 import { DISCORD_TOKEN } from "./secret/secret.ts";
 export async function register(CLIENT_ID: string) {
-  const commands = [
-    new SlashCommandBuilder()
-      .setName("bot")
-      .setDescription("Bot系コマンド")
-      .addSubcommand((input) =>
-        input.setName("ping").setDescription("Botの現在のping値を返します。")
-      )
-      .addSubcommand((input) =>
-        input
-          .setName("invite")
-          .setDescription("指定したBotの招待リンクを生成します。")
-          .addUserOption((input) =>
-            input.setName("bot").setDescription("Bot").setRequired(true)
-          )
-      ),
-  ];
+  const commands = {
+    options: [
+      {
+        type: 1,
+        name: "ping",
+        name_localizations: undefined,
+        description: "Botの現在のping値を返します。",
+        description_localizations: undefined,
+        options: [],
+      },
+      {
+        type: 1,
+        name: "invite",
+        name_localizations: undefined,
+        description: "指定したBotの招待リンクを生成します。",
+        description_localizations: undefined,
+        options: [
+          {
+            name: "bot",
+            name_localizations: undefined,
+            description: "Bot",
+            description_localizations: undefined,
+            required: true,
+            type: 6,
+          },
+        ],
+      },
+    ],
+    name: "bot",
+    name_localizations: undefined,
+    description: "Bot系コマンド",
+    description_localizations: undefined,
+    default_permission: undefined,
+    default_member_permissions: undefined,
+    dm_permission: undefined,
+  };
 
-  const rest = new REST({ version: "10" }).setToken(DISCORD_TOKEN);
-
-  try {
-    console.log("Started refreshing application (/) commands.");
-
-    await rest.put(Routes.applicationCommands(CLIENT_ID), { body: commands });
-
-    console.log("Successfully reloaded application (/) commands.");
-  } catch (error) {
-    console.error(error);
-  }
+  console.log("Started refreshing application (/) commands.");
+  await fetch(
+    `https://discord.com/api/v10${Routes.applicationCommands(CLIENT_ID)}`,
+    {
+      method: "post",
+      headers: {
+        Authorization: `Bot ${DISCORD_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(commands),
+    }
+  )
+    .catch((error) => console.error(error))
+    .then((res) => console.log(res));
 }
