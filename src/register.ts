@@ -7,6 +7,14 @@ export async function register() {
       .setDescription("Bot系コマンド")
       .addSubcommand((input) =>
         input.setName("ping").setDescription("Botの現在のping値を返します。")
+      )
+      .addSubcommand((input) =>
+        input
+          .setName("invite")
+          .setDescription("指定したBotの招待リンクを生成します。")
+          .addUserOption((input) =>
+            input.setName("bot").setDescription("Bot").setRequired(true)
+          )
       ),
   ];
 
