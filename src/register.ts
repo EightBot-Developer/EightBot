@@ -1,6 +1,6 @@
 import { REST, Routes, SlashCommandBuilder } from "./deps/deps.ts";
-import { DISCORD_TOKEN, CLIENT_ID } from "./secret/secret.ts";
-export async function register() {
+import { DISCORD_TOKEN } from "./secret/secret.ts";
+export async function register(CLIENT_ID: string) {
   const commands = [
     new SlashCommandBuilder()
       .setName("bot")
