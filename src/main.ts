@@ -19,6 +19,7 @@ client.once("ready", async () => {
 
 client.on("interactionCreate", async (interaction: Interaction) => {
   if (interaction.isApplicationCommand()) {
+    console.log(interaction.subCommand);
     if (interaction.subCommand === "ping") {
       return await interaction.reply({
         embeds: [
