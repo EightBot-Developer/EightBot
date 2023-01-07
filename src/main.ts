@@ -19,7 +19,7 @@ client.once("ready", async () => {
 
 client.on("interactionCreate", async (interaction: Interaction) => {
   if (interaction.isApplicationCommand()) {
-    if (interaction.name === "ping") {
+    if (interaction.subCommand === "ping") {
       await interaction.reply({
         embeds: [
           new Embed()
@@ -30,7 +30,7 @@ client.on("interactionCreate", async (interaction: Interaction) => {
         ephemeral: true,
       });
     }
-    if (interaction.name === "invite") {
+    if (interaction.subCommand === "invite") {
       const user_id: string = interaction.options[0].value;
       const user: User =
         (await interaction.client.users.get(user_id)) || interaction.user;
