@@ -1,8 +1,7 @@
 import { Client, GatewayIntents, Interaction, register } from "./deps/deps.ts";
-import { DISCORD_TOKEN } from "./secret/secret.ts";
 const client = new Client({
   intents: [GatewayIntents.GUILDS | GatewayIntents.GUILD_MEMBERS],
-  token: DISCORD_TOKEN,
+  token: Deno.env.get("DISCORD_TOKEN"),
 });
 
 client.once("ready", async () => {

@@ -1,6 +1,6 @@
-# secret.readme
+# env.readme
 
-secret の key の説明です。
+env の key の説明です。
 
 ## DISCORD_TOKEN
 

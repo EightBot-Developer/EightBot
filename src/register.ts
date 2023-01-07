@@ -1,5 +1,4 @@
 import { Routes } from "./deps/deps.ts";
-import { DISCORD_TOKEN } from "./secret/secret.ts";
 export async function register(CLIENT_ID: string) {
   const commands = {
     options: [
@@ -44,12 +43,10 @@ export async function register(CLIENT_ID: string) {
     {
       method: "post",
       headers: {
-        Authorization: `Bot ${DISCORD_TOKEN}`,
+        Authorization: `Bot ${Deno.env.get("DISCORD_TOKEN")}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(commands),
     }
-  )
-    .catch((error) => console.error(error))
-    .then((res) => console.log(res));
+  ).then((res) => console.log(res));
 }
