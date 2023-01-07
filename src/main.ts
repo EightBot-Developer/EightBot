@@ -1,21 +1,31 @@
-import { createBot, Intents, startBot } from "./deps.ts";
-import { Secret } from "./secret.ts";
-const bot = createBot({
-  token: Secret.DISCORD_TOKEN,
-  intents: Intents.Guilds | Intents.GuildMessages | Intents.MessageContent,
-  events: {
-    ready: (_bot, payload) => {
-      console.log(`${payload.user.username} is ready!`);
-    },
-  },
+import { Client, GatewayIntents, Interaction, register } from "./deps/deps.ts";
+import { DISCORD_TOKEN } from "./secret/secret.ts";
+const client = new Client({
+  intents: [GatewayIntents.GUILDS | GatewayIntents.GUILD_MEMBERS],
+  token: DISCORD_TOKEN,
 });
 
-bot.events.messageCreate = (b, message) => {
-  if (message.content === "!neko") {
-    b.helpers.sendMessage(message.channelId, {
-      content: "にゃーん",
-    });
-  }
-};
+client.once("ready", async () => {
+  await register();
+  console.log(`Ready! User: ${client.user?.tag}`);
+});
 
-await startBot(bot);
+client.on("interactionCreate", async (interaction: Interaction) => {
+  if (interaction.isApplicationCommand()) {
+    try {
+      const cmd = await import(
+        `./slash/${interaction.name}/${interaction.subCommand}.ts`
+      );
+      const c = new cmd.default();
+      await c.run(interaction);
+    } catch (e) {
+      console.log(e);
+      await interaction.reply({
+        content: "コマンドが見つかりませんでした。",
+        ephemeral: true,
+      });
+    }
+  }
+});
+
+client.connect();
