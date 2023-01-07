@@ -13,9 +13,9 @@
 
 `git clone https://github.com/EightBot-Developer/EightBot.git`をターミナルなどで実行してください。
 
-### 3. env ファイルを作る
+### 3. secret.ts ファイルを作る
 
-.env を作成して、[env.md](https://github.com/EightBot-Developer/EightBot/blob/2.4/env/README.md)を見て key を設定してください。
+src/secret に secret.ts を作成して、[secret.md](https://github.com/EightBot-Developer/EightBot/blob/main/src/secret/README.md)を見て key を設定してください。
 
 ### 4. 実行する
 
