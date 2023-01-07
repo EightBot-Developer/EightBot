@@ -6,7 +6,8 @@ const client = new Client({
 });
 
 client.once("ready", async () => {
-  await register();
+  await register(client.user?.id || "");
+
   console.log(`Ready! User: ${client.user?.tag}`);
 });
 
