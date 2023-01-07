@@ -20,7 +20,7 @@ client.once("ready", async () => {
 client.on("interactionCreate", async (interaction: Interaction) => {
   if (interaction.isApplicationCommand()) {
     if (interaction.subCommand === "ping") {
-      await interaction.reply({
+      return await interaction.reply({
         embeds: [
           new Embed()
             .setTitle("🏓Pong!")
@@ -29,8 +29,7 @@ client.on("interactionCreate", async (interaction: Interaction) => {
         ],
         ephemeral: true,
       });
-    }
-    if (interaction.subCommand === "invite") {
+    } else if (interaction.subCommand === "invite") {
       const user_id: string = interaction.options[0].value;
       const user: User =
         (await interaction.client.users.get(user_id)) || interaction.user;
