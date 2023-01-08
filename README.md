@@ -13,9 +13,10 @@
 
 `git clone https://github.com/EightBot-Developer/EightBot.git`をターミナルなどで実行してください。
 
-### 3. env を設定
+### 3. env を設定、ログチャンネルを設定
 
 [env.md](https://github.com/EightBot-Developer/EightBot/blob/main/src/secret/README.md)を見て key を設定してください。
+10 行目の key 変数を変えてください。
 
 ### 4. 実行する
 
