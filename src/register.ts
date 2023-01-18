@@ -5,7 +5,7 @@ import {
   sleep,
 } from "./deps/deps.ts";
 
-export function register(CLIENT_ID: string) {
+export async function register(CLIENT_ID: string) {
   const commands = [
     {
       type: ApplicationCommandType.ChatInput,
@@ -42,12 +42,33 @@ export function register(CLIENT_ID: string) {
   ];
 
   console.log("Started refreshing application (/) commands.");
+  await fetch(
+    `https://discord.com/api/v10${Routes.applicationCommands(CLIENT_ID)}`,
+    {
+      method: "get",
+      headers: {
+        Authorization: `Bot ${Deno.env.get("DISCORD_TOKEN")}`,
+      },
+    }
+  ).then(async (data) => {
+    for (const command of await data.json()) {
+      const deleteUrl = `https://discord.com/api/v10${Routes.applicationCommands(
+        CLIENT_ID
+      )}/${command.id}`;
+      await fetch(deleteUrl, {
+        method: "delete",
+        headers: {
+          Authorization: `Bot ${Deno.env.get("DISCORD_TOKEN")}`,
+        },
+      }).then((res) => console.log(res.status + ": " + res.statusText));
+    }
+  });
   commands.forEach(async (command) => {
     await sleep(2);
     await fetch(
       `https://discord.com/api/v10${Routes.applicationCommands(CLIENT_ID)}`,
       {
-        method: "put",
+        method: "post",
         headers: {
           Authorization: `Bot ${Deno.env.get("DISCORD_TOKEN")}`,
           "Content-Type": "application/json",
