@@ -39,7 +39,7 @@ export class Totuzen {
     if (cnt > 1) bottom = bottom.replace(/\^Y$/m, "");
     bottom += "￣";
     str = top + str + bottom;
-    await interaction.reply({
+    await interaction.editResponse({
       embeds: [
         new Embed().setTitle("突然の死").setDescription(str).setColor("BLUE"),
       ],
