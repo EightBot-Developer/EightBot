@@ -55,6 +55,7 @@ export async function register(CLIENT_ID: string) {
       const deleteUrl = `https://discord.com/api/v10${Routes.applicationCommands(
         CLIENT_ID
       )}/${command.id}`;
+      await sleep(2);
       await fetch(deleteUrl, {
         method: "delete",
         headers: {
