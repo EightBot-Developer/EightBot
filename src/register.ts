@@ -61,7 +61,27 @@ export async function register(CLIENT_ID: string) {
         headers: {
           Authorization: `Bot ${Deno.env.get("DISCORD_TOKEN")}`,
         },
-      }).then((res) => console.log(res.status + ": " + res.statusText));
+      }).then(async (res) => {
+        if (res.status === 429) {
+          console.log(res.status + ": " + res.statusText + "(retry)");
+          await sleep(2);
+          await fetch(deleteUrl, {
+            method: "delete",
+            headers: {
+              Authorization: `Bot ${Deno.env.get("DISCORD_TOKEN")}`,
+            },
+          }).then(async (res) => {
+            if (res.status === 429) {
+              console.log(res.status + ": " + res.statusText + "(retry)");
+              await sleep(2);
+            } else {
+              console.log(res.status + ": " + res.statusText);
+            }
+          });
+        } else {
+          console.log(res.status + ": " + res.statusText);
+        }
+      });
     }
   });
   commands.forEach(async (command) => {
