@@ -4,7 +4,7 @@ export class Totuzen {
   constructor() {}
   async run(interaction: Interaction) {
     if (!interaction.isApplicationCommand()) return;
-
+    await interaction.defer();
     const sep_top = "人";
     const sep_left = "＞　";
     const sep_right = "　＜";
