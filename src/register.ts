@@ -47,7 +47,7 @@ export function register(CLIENT_ID: string) {
     await fetch(
       `https://discord.com/api/v10${Routes.applicationCommands(CLIENT_ID)}`,
       {
-        method: "post",
+        method: "put",
         headers: {
           Authorization: `Bot ${Deno.env.get("DISCORD_TOKEN")}`,
           "Content-Type": "application/json",

@@ -19,7 +19,7 @@ function handler(): Response {
 
 serve(handler, { port: 12312 });
 client.once("ready", () => {
-  register(client.user?.id || "");
+  register(client.user?.id || "");  
   console.log(`Ready! User: ${client.user?.tag}`);
 });
 client.on("guildCreate", async (guild: Guild) => {
