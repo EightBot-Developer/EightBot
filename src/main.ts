@@ -4,7 +4,8 @@ import {
   GatewayIntents,
   Guild,
   Interaction,
-  register,
+  SlashCommandOptionType,
+  SlashCommandPartial,
 } from "./deps/deps.ts";
 import { files } from "./files/index.ts";
 const key = "982215169465786428";
@@ -27,7 +28,46 @@ function handler(): Response {
 
 serve(handler, { port: 12312 });
 client.once("ready", async () => {
-  register(client.user?.id || "");
+  const commands: SlashCommandPartial[] = [
+    {
+      type: "CHAT_INPUT",
+      name: "ping",
+      description: "Botの現在のping値を返します。",
+      options: [],
+    },
+    {
+      type: "CHAT_INPUT",
+      name: "invite",
+      description: "指定したBotの招待リンクを生成します。",
+      options: [
+        {
+          name: "bot",
+          description: "Bot",
+          required: true,
+          type: SlashCommandOptionType.USER,
+        },
+      ],
+    },
+    {
+      type: "CHAT_INPUT",
+      name: "totuzen",
+      description: "突然の死を生成します。",
+      options: [
+        {
+          name: "text",
+          description: "テキスト",
+          type: SlashCommandOptionType.STRING,
+          required: true,
+        },
+      ],
+    },
+  ];
+  commands.forEach((command) => {
+    client.interactions.commands
+      .create(command)
+      .then((cmds) => console.log(`Created Slash Command ${cmds.name}!`))
+      .catch(() => console.log(`Failed to create ${command.name} command!`));
+  });
   console.log(`Ready! User: ${client.user?.tag}`);
   const siezds = await client.guilds.size();
   client.setPresence({
