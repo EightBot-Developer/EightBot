@@ -1,6 +1,6 @@
 # EightBot
 
-<img src="https://discord.com/api/guilds/980051727820664832/embed.png"/> <img src="https://img.shields.io/badge/Deno- 1.x -black"/> <img src="https://img.shields.io/badge/EightBot-v2.3.0%20beta-blue"/> <img src="https://img.shields.io/badge/yarn-1.22.19-blue"/><br>
+<img src="https://discord.com/api/guilds/980051727820664832/embed.png"/> <img src="https://img.shields.io/badge/Deno- 1.x -black"/> <img src="https://img.shields.io/badge/EightBot-v2.3.0%20beta-blue"/><br>
 自称高性能 DiscordBot です。<br>
 
 ## この Bot を動かす。
