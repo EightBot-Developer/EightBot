@@ -51,37 +51,45 @@ export async function register(CLIENT_ID: string) {
       },
     }
   ).then(async (data) => {
-    for (const command of await data.json()) {
-      const deleteUrl = `https://discord.com/api/v10${Routes.applicationCommands(
-        CLIENT_ID
-      )}/${command.id}`;
-      await sleep(2);
-      await fetch(deleteUrl, {
-        method: "delete",
-        headers: {
-          Authorization: `Bot ${Deno.env.get("DISCORD_TOKEN")}`,
-        },
-      }).then(async (res) => {
-        if (res.status === 429) {
-          console.log(res.status + ": " + res.statusText + "(retry)");
-          await sleep(2);
-          await fetch(deleteUrl, {
-            method: "delete",
-            headers: {
-              Authorization: `Bot ${Deno.env.get("DISCORD_TOKEN")}`,
-            },
-          }).then(async (res) => {
-            if (res.status === 429) {
-              console.log(res.status + ": " + res.statusText + "(retry)");
-              await sleep(2);
-            } else {
-              console.log(res.status + ": " + res.statusText);
-            }
-          });
-        } else {
-          console.log(res.status + ": " + res.statusText);
+    let ok = false;
+    for (const commandss of await data.json()) {
+      commands.forEach((command) => {
+        if ((command.name = commandss.name)) {
+          ok = true;
         }
       });
+      if (!ok) {
+        const deleteUrl = `https://discord.com/api/v10${Routes.applicationCommands(
+          CLIENT_ID
+        )}/${commandss.id}`;
+        await sleep(2);
+        await fetch(deleteUrl, {
+          method: "delete",
+          headers: {
+            Authorization: `Bot ${Deno.env.get("DISCORD_TOKEN")}`,
+          },
+        }).then(async (res) => {
+          if (res.status === 429) {
+            console.log(res.status + ": " + res.statusText + "(retry)");
+            await sleep(2);
+            await fetch(deleteUrl, {
+              method: "delete",
+              headers: {
+                Authorization: `Bot ${Deno.env.get("DISCORD_TOKEN")}`,
+              },
+            }).then(async (res) => {
+              if (res.status === 429) {
+                console.log(res.status + ": " + res.statusText + "(retry)");
+                await sleep(2);
+              } else {
+                console.log(res.status + ": " + res.statusText);
+              }
+            });
+          } else {
+            console.log(res.status + ": " + res.statusText);
+          }
+        });
+      }
     }
   });
   commands.forEach(async (command) => {
