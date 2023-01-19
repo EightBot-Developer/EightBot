@@ -66,7 +66,23 @@ client.once("ready", async () => {
     client.interactions.commands
       .create(command)
       .then((cmds) => console.log(`Created Slash Command ${cmds.name}!`))
-      .catch(() => console.log(`Failed to create ${command.name} command!`));
+      .catch(() => {
+        console.log(`Failed to create ${command.name} command!`);
+        client.interactions.commands
+          .create(command)
+          .then((cmds) => console.log(`Created Slash Command ${cmds.name}!`))
+          .catch(() => {
+            console.log(`Failed to create ${command.name} command!`);
+            client.interactions.commands
+              .create(command)
+              .then((cmds) =>
+                console.log(`Created Slash Command ${cmds.name}!`)
+              )
+              .catch(() =>
+                console.log(`Failed to create ${command.name} command!`)
+              );
+          });
+      });
   });
   console.log(`Ready! User: ${client.user?.tag}`);
   const siezds = await client.guilds.size();
