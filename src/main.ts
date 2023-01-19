@@ -11,6 +11,13 @@ const key = "982215169465786428";
 const client = new Client({
   intents: [GatewayIntents.GUILDS | GatewayIntents.GUILD_MEMBERS],
   token: Deno.env.get("DISCORD_TOKEN"),
+  presence: {
+    activity: {
+      name: `起動しています...`,
+      type: ActivityType.Playing,
+    },
+    status: "idle",
+  },
 });
 import { serve } from "https://deno.land/std@0.171.0/http/server.ts";
 import { ActivityType } from "https://raw.githubusercontent.com/discordjs/discord-api-types/0.37.26/deno/v10.ts";
@@ -19,12 +26,25 @@ function handler(): Response {
 }
 
 serve(handler, { port: 12312 });
-client.once("ready", () => {
-  register(client.user?.id || "");  
+client.once("ready", async () => {
+  register(client.user?.id || "");
   console.log(`Ready! User: ${client.user?.tag}`);
-  setInterval(() => {
+  const siezds = await client.guilds.size();
+  client.setPresence({
+    activity: {
+      name: `/help | ${siezds} server`,
+      type: ActivityType.Playing,
+    },
+    status: "online",
+  });
+  setInterval(async () => {
+    const siezd = await client.guilds.size();
     client.setPresence({
-      activity: { name: "/help", type: ActivityType.Playing },
+      activity: {
+        name: `/help | ${siezd} server`,
+        type: ActivityType.Playing,
+      },
+      status: "online",
     });
   }, 10000);
 });
