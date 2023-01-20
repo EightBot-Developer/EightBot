@@ -15,8 +15,7 @@
 
 ### 3. env を設定、ログチャンネルを設定
 
-[env.md](https://github.com/EightBot-Developer/EightBot/blob/main/src/secret/README.md)を見て key を設定してください。
-10 行目の key 変数を変えてください。
+[env.md](https://github.com/EightBot-Developer/EightBot/blob/main/src/env/env.md)を見て key を設定してください。
 
 ### 4. 実行する
 
