@@ -61,6 +61,77 @@ client.once("ready", async () => {
         },
       ],
     },
+    {
+      type: "CHAT_INPUT",
+      name: "5000",
+      description: "5000兆円欲しいを生成します。",
+      options: [
+        {
+          name: "top",
+          description: "上部文字列",
+          type: SlashCommandOptionType.STRING,
+          required: true,
+        },
+        {
+          name: "bottom",
+          description: "下部文字列",
+          type: SlashCommandOptionType.STRING,
+          required: true,
+        },
+        {
+          name: "type",
+          description: "画像の拡張子",
+          choices: [
+            { name: "png(お勧め)", value: "png" },
+            { name: "jpg", value: "jpg" },
+            { name: "webp", value: "webp" },
+          ],
+          type: SlashCommandOptionType.STRING,
+          required: true,
+        },
+        {
+          name: "quality",
+          description: "画像の画質",
+          choices: [
+            { name: "低", value: "30" },
+            { name: "中", value: "70" },
+            { name: "高", value: "100" },
+          ],
+          type: SlashCommandOptionType.STRING,
+          required: true,
+        },
+        {
+          name: "hoshii",
+          description: "下部文字列を「欲しい！」に固定する",
+          choices: [
+            { name: "固定する", value: "true" },
+            { name: "固定しない", value: "false" },
+          ],
+          type: SlashCommandOptionType.STRING,
+          required: true,
+        },
+        {
+          name: "noalpha",
+          description: "背景色を白にする",
+          choices: [
+            { name: "白にする", value: "true" },
+            { name: "白にしない", value: "false" },
+          ],
+          type: SlashCommandOptionType.STRING,
+          required: true,
+        },
+        {
+          name: "rainbow",
+          description: "虹色にする",
+          choices: [
+            { name: "虹色にする", value: "true" },
+            { name: "虹色にしない", value: "false" },
+          ],
+          type: SlashCommandOptionType.STRING,
+          required: true,
+        },
+      ],
+    },
   ];
   commands.forEach((command) => {
     client.interactions.commands
