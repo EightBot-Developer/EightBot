@@ -8,10 +8,14 @@ import {
   SlashCommandPartial,
 } from "./deps/deps.ts";
 import { files } from "./files/index.ts";
-const key = "982215169465786428";
+const LOG_CHANNEL_ID = Deno.env.get("LOG_CHANNEL_ID") || "";
+const token = Deno.env.get("DISCORD_TOKEN") || "";
+if (token === "") throw new Error("TOKEN is not set.");
+if (LOG_CHANNEL_ID === "") throw new Error("LOG_CHANNEL_ID is not set.");
+
 const client = new Client({
   intents: [GatewayIntents.GUILDS | GatewayIntents.GUILD_MEMBERS],
-  token: Deno.env.get("DISCORD_TOKEN"),
+  token: token,
   presence: {
     activity: {
       name: `起動しています...`,
@@ -176,7 +180,7 @@ client.once("ready", async () => {
   }, 10000);
 });
 client.on("guildCreate", async (guild: Guild) => {
-  const ch = await client.channels.get(key);
+  const ch = await client.channels.get(LOG_CHANNEL_ID);
   if (!ch?.isText()) return;
   await ch.send({
     embeds: [
@@ -205,7 +209,7 @@ client.on("guildCreate", async (guild: Guild) => {
   });
 });
 client.on("guildDelete", async (guild: Guild) => {
-  const ch = await client.channels.get(key);
+  const ch = await client.channels.get(LOG_CHANNEL_ID);
   if (!ch?.isText()) return;
   await ch.send({
     embeds: [
