@@ -82,9 +82,9 @@ export class Slot {
       });
       if (x == 10) {
         if (result === result2 && result2 === result3) {
-          await interaction.send({ content: "あなたは勝利しました。" });
+          await interaction.send("あなたは負けました。");
         } else {
-          await interaction.send({ content: "あなたは負けました。" });
+          await interaction.send("あなたは負けました。");
         }
       }
     }
