@@ -6,8 +6,9 @@ import {
   Interaction,
   SlashCommandOptionType,
   SlashCommandPartial,
+  ActivityType,
+  files,
 } from "./deps/deps.ts";
-import { files } from "./files/index.ts";
 const LOG_CHANNEL_ID = Deno.env.get("LOG_CHANNEL_ID") || "";
 const token = Deno.env.get("DISCORD_TOKEN") || "";
 if (token === "") throw new Error("TOKEN is not set.");
@@ -25,9 +26,11 @@ const client = new Client({
   },
 });
 import { serve } from "https://deno.land/std@0.171.0/http/server.ts";
-import { ActivityType } from "https://raw.githubusercontent.com/discordjs/discord-api-types/0.37.26/deno/v10.ts";
 function handler(): Response {
-  return new Response("オンラインです。");
+  return new Response(
+    '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>EightBot</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" /> <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script></head><body style="text-align: center;"><h1>EightBot は正常に動作しています。</h1> <button type="button" class="btn btn-success  btn-lg" disabled>動作中！</button><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script></body></html> ',
+    { headers: { "Content-Type": "text/html" } }
+  );
 }
 
 serve(handler, { port: 12312 });
@@ -187,7 +190,7 @@ client.on("guildCreate", async (guild: Guild) => {
       new Embed()
         .setTitle("🆕｜サーバー参加")
         .setDescription(`**${guild.name}**に追加されました`)
-        .setThumbnail({ url: guild.iconURL("dynamic") })
+        .setThumbnail({ url: guild.iconURL("webp") })
         .addFields(
           {
             name: "🆔｜id",
@@ -204,7 +207,8 @@ client.on("guildCreate", async (guild: Guild) => {
             }`,
           }
         )
-        .setColor("GREEN"),
+        .setColor("GREEN")
+        .setTimestamp(new Date()),
     ],
   });
 });
@@ -216,7 +220,7 @@ client.on("guildDelete", async (guild: Guild) => {
       new Embed()
         .setTitle("😭｜サーバー退出")
         .setDescription(`**${guild.name}**でkickされました。`)
-        .setThumbnail({ url: guild.iconURL("dynamic") })
+        .setThumbnail({ url: guild.iconURL("webp") })
         .addFields(
           {
             name: "🆔｜id",
@@ -233,7 +237,8 @@ client.on("guildDelete", async (guild: Guild) => {
             }`,
           }
         )
-        .setColor("RED"),
+        .setColor("RED")
+        .setTimestamp(new Date()),
     ],
   });
 });
