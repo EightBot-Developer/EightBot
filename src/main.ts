@@ -153,6 +153,7 @@ client.once("ready", async () => {
         },
       ],
     },
+    { type: "MESSAGE", name: "メッセージの間に空白を入れる" },
   ];
   commands.forEach((command) => {
     client.interactions.commands

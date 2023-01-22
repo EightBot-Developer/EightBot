@@ -5,6 +5,7 @@ import { Totuzen } from "./totuzen.ts";
 import { Gosentyoen } from "./gosentyoen.ts";
 import { DownCheck } from "./downcheck.ts";
 import { Slot } from "./slot.ts";
+import { TextSpace } from "./textspace.ts";
 async function log(interaction: Interaction, client: Client) {
   if (!interaction.isApplicationCommand()) return;
 
@@ -15,7 +16,7 @@ async function log(interaction: Interaction, client: Client) {
   await ch.send({
     content:
       "```json\n" +
-      `{name: ${interaction.data.name}, id: ${interaction.data.id}, type: ${interaction.data.type}, target_id: ${interaction.data.target_id}, resolved: ${interaction.data.resolved}, options: ${interaction.data.options}}` +
+      `{name: "${interaction.data.name}", id: "${interaction.data.id}", type: ${interaction.data.type}, target_id: ${interaction.data.target_id}, resolved: ${interaction.data.resolved}, options: ${interaction.data.options}}` +
       "```",
     embeds: [
       new Embed()
@@ -84,6 +85,10 @@ export async function files(
       break;
     case "slot":
       await new Slot().run(interaction);
+      await log(interaction, client);
+      break;
+    case "メッセージの間に空白を入れる":
+      await new TextSpace().run(interaction);
       await log(interaction, client);
       break;
     default:
