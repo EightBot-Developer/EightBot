@@ -3,6 +3,8 @@ import { Ping } from "./ping.ts";
 import { Invite } from "./invite.ts";
 import { Totuzen } from "./totuzen.ts";
 import { Gosentyoen } from "./gosentyoen.ts";
+import { DownCheck } from "./downcheck.ts";
+import { Slot } from "./slot.ts";
 async function log(interaction: Interaction, client: Client) {
   if (!interaction.isApplicationCommand()) return;
 
@@ -74,6 +76,14 @@ export async function files(
       break;
     case "5000":
       await new Gosentyoen().run(interaction);
+      await log(interaction, client);
+      break;
+    case "downcheck":
+      await new DownCheck().run(interaction);
+      await log(interaction, client);
+      break;
+    case "slot":
+      await new Slot().run(interaction);
       await log(interaction, client);
       break;
     default:

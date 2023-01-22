@@ -55,6 +55,7 @@ client.once("ready", async () => {
         },
       ],
     },
+    { type: "CHAT_INPUT", name: "slot", description: "スロットができます。" },
     {
       type: "CHAT_INPUT",
       name: "totuzen",
@@ -63,6 +64,19 @@ client.once("ready", async () => {
         {
           name: "text",
           description: "テキスト",
+          type: SlashCommandOptionType.STRING,
+          required: true,
+        },
+      ],
+    },
+    {
+      type: "CHAT_INPUT",
+      name: "downcheck",
+      description: "入力したサービスがダウンしているか調べます。",
+      options: [
+        {
+          name: "サービス名",
+          description: "ダウンしているか調べるサービスの名前。",
           type: SlashCommandOptionType.STRING,
           required: true,
         },
