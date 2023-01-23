@@ -10,7 +10,6 @@ async function log(interaction: Interaction, client: Client) {
   if (!interaction.isApplicationCommand()) return;
 
   const LOG_CHANNEL_ID = Deno.env.get("LOG_CHANNEL_ID") || "";
-
   const ch = await client.channels.get(LOG_CHANNEL_ID);
   if (!ch?.isText()) return;
   await ch.send({
