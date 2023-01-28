@@ -6,6 +6,9 @@ import { Gosentyoen } from "./gosentyoen.ts";
 import { DownCheck } from "./downcheck.ts";
 import { Slot } from "./slot.ts";
 import { TextSpace } from "./textspace.ts";
+import { URLCheck } from "./urlcheck.ts";
+import { URLShort } from "./urlshort.ts";
+import { BanMember } from "./banmember.ts";
 async function log(interaction: Interaction, client: Client) {
   if (!interaction.isApplicationCommand()) return;
 
@@ -88,6 +91,18 @@ export async function files(
       break;
     case "メッセージの間に空白を入れる":
       await new TextSpace().run(interaction);
+      await log(interaction, client);
+      break;
+    case "urlcheck":
+      await new URLCheck().run(interaction);
+      await log(interaction, client);
+      break;
+    case "urlshort":
+      new URLShort().run(interaction);
+      await log(interaction, client);
+      break;
+    case "banmember":
+      await new BanMember().run(interaction);
       await log(interaction, client);
       break;
     default:

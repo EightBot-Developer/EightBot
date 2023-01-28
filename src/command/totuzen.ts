@@ -50,7 +50,7 @@ export class Totuzen {
         new Embed()
           .setTitle("突然の死")
           .setDescription(convert(interaction.options[0].value))
-          .setColor("BLUE"),
+          .setColor(""),
       ],
       allowedMentions: { parse: [] },
       ephemeral: true,
