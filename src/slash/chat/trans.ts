@@ -3,17 +3,12 @@ import {
   EmbedBuilder,
   SlashCommandBuilder,
 } from "discord.js";
-import { en_us } from "../../locales/en-US.js";
-import { ja } from "../../locales/ja.js";
 
 export default {
   command: new SlashCommandBuilder()
-    .setName("ping")
-    .setDescription(en_us.ping.description)
-    .setDescriptionLocalizations({
-      "en-US": en_us.ping.description,
-      ja: ja.ping.description,
-    }),
+    .setName("ping2")
+    .setDescription("Measure the bot's ping value.")
+    .setDescriptionLocalization("ja", "BotのPing値を測ります。"),
   async execute(i: CommandInteraction) {
     await i.reply({ content: ":ping_pong:Pinging...", fetchReply: true }).then(
       async (msg) =>

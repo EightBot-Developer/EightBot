@@ -1,5 +1,14 @@
-import { Client, ActivityType, Events } from "discord.js";
+import {
+  Client,
+  ActivityType,
+  Events,
+  SlashCommandBuilder,
+  ContextMenuCommandBuilder,
+  REST,
+  Routes,
+} from "discord.js";
 import { run } from "../helper/server.js";
+import config from "../config.js";
 /**
  * @param {number} ms
  */
@@ -19,13 +28,6 @@ export default {
       status: "dnd",
     });
     client.rebootFlag = 1;
-    const command = [];
-    client.slash.forEach((value) => {
-      command.push(value.command.toJSON());
-    });
-    client.contextmenu.forEach((value) => {
-      command.push(value.command.toJSON());
-    });
     setInterval(() => {
       client.user.setPresence({
         activities: [

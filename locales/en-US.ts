@@ -7,6 +7,7 @@ export const en_us = {
   },
   verify: {
     description: "Create an verify panel.",
+    optionname: "verifytype",
     options: [
       "2FA Check",
       "One click",

@@ -6,9 +6,14 @@ import {
   Partials,
   EmbedBuilder,
   BitFieldResolvable,
+  REST,
+  Routes,
+  ContextMenuCommandBuilder,
+  SlashCommandBuilder,
 } from "discord.js";
 import { timeToJST } from "./util/function.js";
 import config from "./config.js";
+import chalk from "chalk";
 import "./helper/extends.js";
 const client = new Client({
   intents: Object.values(GatewayIntentBits) as BitFieldResolvable<
@@ -24,30 +29,33 @@ client.rebootFlag = 0;
 client.contextmenu = new Collection();
 client.slash = new Collection();
 client.cooldowns = new Collection();
+const commands: Array<SlashCommandBuilder | ContextMenuCommandBuilder> = [];
 
-/*for (const folder of fs.readdirSync("./slash")) {
+for (const folder of fs.readdirSync("./src/slash")) {
   const commandFiles = fs
-    .readdirSync(`./slash/${folder}`)
+    .readdirSync(`./src/slash/${folder}`)
     .filter((file) => file.endsWith(".ts"));
   for (const file of commandFiles) {
-    const command = require(`./slash/${folder}/${file}`);
-    client.slash.set(command.name, command);
+    const slash_d = await import(`./slash/${folder}/${file}`);
+    const slash = slash_d.default;
+    client.slash.set(slash.command.name, slash);
+    commands.push(slash.command.toJSON());
   }
 }
 
-for (const folder of fs.readdirSync("./contextmenu")) {
+for (const folder of fs.readdirSync("./src/contextmenu")) {
   const commandFiles = fs
-    .readdirSync(`./contextmenu/${folder}`)
+    .readdirSync(`./src/contextmenu/${folder}`)
     .filter((file) => file.endsWith(".ts"));
   for (const file of commandFiles) {
-    const contextmenu = require(`./contextmenu/${folder}/${file}`);
-    client.contextmenu.set(contextmenu.name, contextmenu);
+    const contextmenu_d = await import(`./contextmenu/${folder}/${file}`);
+    const contextmenu = contextmenu_d.default;
+    client.contextmenu.set(contextmenu.command.name, contextmenu);
+    commands.push(contextmenu.command.toJSON());
   }
-} */
+}
 
-const eventFiles = fs.readdirSync("./src/events");
-
-for (const file of eventFiles) {
+for (const file of fs.readdirSync("./src/events")) {
   const event_d = await import(`./events/${file}`);
   const event = event_d.default;
   if (event.once) {
@@ -56,7 +64,14 @@ for (const file of eventFiles) {
     client.on(event.name, async (...args) => await event.execute(...args));
   }
 }
+const rest = new REST({ version: "10" }).setToken(config.token);
+console.log("Started refreshing application (/) commands.");
 
+rest.put(Routes.applicationCommands(config.clientId), {
+  body: commands,
+});
+
+console.log("Successfully reloaded application (/) commands.");
 client.login(config.token).then(() => console.log("login..."));
 
 process.on("uncaughtException", (error) => {

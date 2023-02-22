@@ -7,6 +7,7 @@ export const ja = {
   },
   verify: {
     description: "Create an verify panel.",
+    optionname: "認証の種類",
     options: [
       "2段階認証をしているかチェック",
       "1クリック",

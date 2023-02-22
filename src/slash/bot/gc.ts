@@ -3,8 +3,8 @@ import {
   EmbedBuilder,
   SlashCommandBuilder,
 } from "discord.js";
-import { en_us } from "../../locales/en-US.js";
-import { ja } from "../../locales/ja.js";
+import { en_us } from "../../../locales/en-US.js";
+import { ja } from "../../../locales/ja.js";
 import Keyv from "keyv";
 const db = new Keyv("sqlite://db/globalchat.sqlite", { table: "channels" });
 export default {
