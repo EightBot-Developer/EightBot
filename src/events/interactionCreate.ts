@@ -162,7 +162,7 @@ export default {
                         name: "エラー",
                         value:
                           "```js\n" +
-                          require("util").inspect(error).slice(0, 1000) +
+                          (await import("util")).inspect(error).slice(0, 1000) +
                           "\n```",
                       },
                     ],
@@ -200,7 +200,7 @@ export default {
                     name: "エラー",
                     value:
                       "```js\n" +
-                      require("util").inspect(error).slice(0, 1000) +
+                      (await import("util")).inspect(error).slice(0, 1000) +
                       "\n```",
                   },
                 ],

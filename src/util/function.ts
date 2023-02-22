@@ -1,7 +1,5 @@
 import { Client, EmbedBuilder } from "discord.js";
-import { createRequire } from "module";
 import { Config } from "./config_type.js";
-const require = createRequire(import.meta.url);
 
 /**
  * タイムスタンプをJSTタイムスタンプに変換します。
@@ -37,10 +35,10 @@ export function ErrorLog(
     .setDescription("```\n" + error.stack + "\n```")
     .setColor("Red")
     .setTimestamp();
-  client.channels.fetch(config.logChannelId).then((c) => {
+  client.channels.fetch(config.logChannelId).then(async (c) => {
     if (!c.isTextBased()) return;
     c.send({
-      content: `\`\`\`js\n${require("util")
+      content: `\`\`\`js\n${(await import("util"))
         .inspect(error)
         .slice(0, 1800)}\n\`\`\``,
       embeds: [embed],
@@ -72,11 +70,11 @@ export function ErrorLog2(
     .setDescription("```\n" + error + "\n```")
     .setColor("Red")
     .setTimestamp();
-  client.channels.fetch(config.logChannelId).then((c) => {
+  client.channels.fetch(config.logChannelId).then(async (c) => {
     if (!c.isTextBased()) return;
 
     c.send({
-      content: `\`\`\`js\n${require("util")
+      content: `\`\`\`js\n${(await import("util"))
         .inspect(error)
         .slice(0, 1800)}\n\`\`\``,
       embeds: [embed],

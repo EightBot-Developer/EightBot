@@ -1,5 +1,4 @@
 import fs from "node:fs";
-import { createRequire } from "node:module";
 import {
   Client,
   GatewayIntentBits,
@@ -11,7 +10,6 @@ import {
 import { timeToJST } from "./util/function.js";
 import config from "./config.js";
 import "./helper/extends.js";
-const require = createRequire(import.meta.url);
 const client = new Client({
   intents: Object.values(GatewayIntentBits) as BitFieldResolvable<
     keyof typeof GatewayIntentBits,
@@ -71,7 +69,7 @@ process.on("uncaughtException", (error) => {
   client.channels.fetch(config.logChannelId).then(async (c) => {
     if (!c.isTextBased()) return;
     await c.send({
-      content: `\`\`\`js\n${require("util")
+      content: `\`\`\`js\n${(await import("util"))
         .inspect(error)
         .slice(0, 1800)}\n\`\`\``,
       embeds: [embed],
