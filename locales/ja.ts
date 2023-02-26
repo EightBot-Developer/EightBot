@@ -5,6 +5,7 @@ export const ja = {
   globalchat: {
     description: "グローバルチャットに入室退室します。",
   },
+
   verify: {
     description: "Create an verify panel.",
     optionname: "認証の種類",
@@ -20,5 +21,13 @@ export const ja = {
       "画像",
       "テキスト",
     ],
+  },
+  setting: {
+    description: "Botの設定を開く",
+    optionname: "設定",
+    options: ["セキュリティ", "NGワード"],
+  },
+  aichat: {
+    description: "AIチャットを有効/無効にします。",
   },
 };

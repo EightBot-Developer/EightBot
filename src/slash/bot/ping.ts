@@ -1,5 +1,5 @@
 import {
-  CommandInteraction,
+  ChatInputCommandInteraction,
   EmbedBuilder,
   SlashCommandBuilder,
 } from "discord.js";
@@ -14,11 +14,11 @@ export default {
       "en-US": en_us.ping.description,
       ja: ja.ping.description,
     }),
-  async execute(i: CommandInteraction) {
+  async execute(i: ChatInputCommandInteraction) {
     await i.reply({ content: ":ping_pong:Pinging...", fetchReply: true }).then(
       async (msg) =>
         await msg.edit({
-          content: null,
+          content: null,  
           embeds: [
             new EmbedBuilder()
               .setTitle(":ping_pong:Ping!")

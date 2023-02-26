@@ -12,7 +12,6 @@ import {
 declare module "discord.js" {
   interface Client {
     rebootFlag: number;
-    contextmenu: Collection<any, any>;
     slash: Collection<any, any>;
     cooldowns: Collection<any, any>;
   }

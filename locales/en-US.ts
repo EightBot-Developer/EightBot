@@ -21,4 +21,12 @@ export const en_us = {
       "Text",
     ],
   },
+  setting: {
+    description: "Open Bot Settings.",
+    optionname: "setting",
+    options: ["security", "ngword"],
+  },
+  aichat: {
+    description: "Enables/disables AI chat.",
+  },
 };

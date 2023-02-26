@@ -1,5 +1,5 @@
 import {
-  CommandInteraction,
+  ChatInputCommandInteraction,
   EmbedBuilder,
   SlashCommandBuilder,
 } from "discord.js";
@@ -15,7 +15,7 @@ export default {
       "en-US": en_us.globalchat.description,
       ja: ja.globalchat.description,
     }),
-  async execute(i: CommandInteraction) {
+  async execute(i: ChatInputCommandInteraction) {
     const channels: Array<String> = await db.get("channels");
     let found: boolean = false;
     channels.forEach((value) => {

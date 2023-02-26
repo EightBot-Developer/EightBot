@@ -13,20 +13,19 @@ import {
 } from "discord.js";
 import { timeToJST } from "./util/function.js";
 import config from "./config.js";
-import chalk from "chalk";
 import "./helper/extends.js";
 const client = new Client({
   intents: Object.values(GatewayIntentBits) as BitFieldResolvable<
     keyof typeof GatewayIntentBits,
     number
   >,
+  ws: { properties: { browser: "Discord Android" } },
   allowedMentions: { repliedUser: false, parse: ["roles", "users"] },
   partials: Object.values(Partials) as Partials[],
 });
 
 client.rebootFlag = 0;
 
-client.contextmenu = new Collection();
 client.slash = new Collection();
 client.cooldowns = new Collection();
 const commands: Array<SlashCommandBuilder | ContextMenuCommandBuilder> = [];
@@ -50,7 +49,7 @@ for (const folder of fs.readdirSync("./src/contextmenu")) {
   for (const file of commandFiles) {
     const contextmenu_d = await import(`./contextmenu/${folder}/${file}`);
     const contextmenu = contextmenu_d.default;
-    client.contextmenu.set(contextmenu.command.name, contextmenu);
+    client.slash.set(contextmenu.command.name, contextmenu);
     commands.push(contextmenu.command.toJSON());
   }
 }
