@@ -63,8 +63,8 @@ export default {
       });
     switch (i.options.getSubcommand()) {
       case "join":
-        const channels: Array<String> = await db.get("channels");
-        let found: boolean = false;
+        const channels: Array<string> = await db.get("channels");
+        let found = false;
         channels.forEach((value) => {
           if (value === i.channelId) {
             found = true;

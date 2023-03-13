@@ -7,8 +7,8 @@ import { Config } from "./config_type.js";
  * @param {number} timestamp
  */
 function timeToJSTTimestamp(timestamp: number) {
-  var dt = new Date();
-  var tz = dt.getTimezoneOffset();
+  let dt = new Date();
+  let tz = dt.getTimezoneOffset();
   tz = (tz + 540) * 60 * 1000;
   dt = new Date(timestamp + tz);
   return dt;
@@ -87,7 +87,7 @@ export function ErrorLog2(
  * @param {number} timestamp
  * @param {boolean} format
  */
-export function timeToJST(timestamp: number, format: boolean = false) {
+export function timeToJST(timestamp: number, format = false) {
   const dt = timeToJSTTimestamp(timestamp);
   const year = dt.getFullYear();
   const month = dt.getMonth() + 1;
