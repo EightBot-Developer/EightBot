@@ -7,7 +7,6 @@ import {
   REST,
   Routes,
 } from "discord.js";
-import { run } from "../helper/server.js";
 import config from "../config.js";
 /**
  * @param {number} ms
@@ -21,7 +20,6 @@ export default {
   once: true,
   async execute(client: Client) {
     console.log("Logged in as " + client.user.tag);
-    run(client);
     await sleep(500);
     client.user.setPresence({
       activities: [{ name: "再起動中...", type: ActivityType.Watching }],
