@@ -2,6 +2,11 @@ import { Client } from "discord.js";
 import express, { Application, Request, Response } from "express";
 import config from "../config.js";
 import fetch from "node-fetch";
+import path from "node:path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+
+const __dirname = path.dirname(__filename);
 const oauth = {
   clientid: config.clientId,
   clientsecret: config.clientSecret,
@@ -11,8 +16,11 @@ const oauth = {
 export function run(client: Client) {
   const app: Application = express();
   app.get("/", (req: Request, res: Response) => {
-    res.send("test");
-  }); // testしてみる
+    res.sendFile(path.join(__dirname + "/web/index.html"));
+  });
+  app.get("/func", (req: Request, res: Response) => {
+    res.sendFile(path.join(__dirname + "/web/func.html"));
+  });
   app
     .get("/login", async (req, res) => {
       res.redirect(
@@ -57,5 +65,10 @@ export function run(client: Client) {
       });
       console.log(await content.json());
     });
+  app.use("/files/vue", express.static(path.join(__dirname + "/vue")));
+
+  app.use((req, res, next) => {
+    res.status(404).sendFile(path.join(__dirname + "/web/404.html"));
+  });
   app.listen(8080);
 }

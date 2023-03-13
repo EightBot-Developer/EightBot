@@ -1,20 +1,13 @@
-import { Events, Message } from "discord.js";
+import { Message, Events } from "discord.js";
 import Keyv from "keyv";
-import { security_func } from "../function/index.js";
-const automod = new Keyv("sqlite://db/automod.sqlite", { table: "channels" });
+import { message_bottom } from "../function/message_bottom.js";
+const db = new Keyv("sqlite://db/message_bottom.sqlite", { table: "chid_mid" });
+
 export default {
   name: Events.MessageCreate,
-  once: true,
   async execute(message: Message) {
-    const channels: Array<String> = await automod.get("channels");
-    try {
-      channels.forEach(async (value) => {
-        if (value === message.channelId) {
-          await security_func(message);
-        }
-      });
-    } catch {
-      return;
+    if (await db.get(message.channelId)) {
+      await message_bottom(message);
     }
   },
 };

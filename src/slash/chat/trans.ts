@@ -1,5 +1,5 @@
 import {
-  CommandInteraction,
+  ChatInputCommandInteraction,
   EmbedBuilder,
   SlashCommandBuilder,
 } from "discord.js";
@@ -9,7 +9,7 @@ export default {
     .setName("ping2")
     .setDescription("Measure the bot's ping value.")
     .setDescriptionLocalization("ja", "BotのPing値を測ります。"),
-  async execute(i: CommandInteraction) {
+  async execute(i: ChatInputCommandInteraction) {
     await i.reply({ content: ":ping_pong:Pinging...", fetchReply: true }).then(
       async (msg) =>
         await msg.edit({

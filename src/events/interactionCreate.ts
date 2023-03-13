@@ -5,6 +5,7 @@ import {
   Events,
   SnowflakeUtil,
   PermissionFlagsBits,
+  EmbedBuilder,
   BaseInteraction,
 } from "discord.js";
 
@@ -21,63 +22,59 @@ export default {
         );
 
       if (!command) {
-        interaction.error(
-          "❌コマンドがありません",
-          `そのコマンドは存在しません。`
-        );
-        return;
+        return await interaction.reply({
+          embeds: [
+            new EmbedBuilder()
+              .setTitle(
+                "<:x_:1061166079495389196> | 失敗 - ❌コマンドが見つかりません"
+              )
+              .setDescription("コマンドが存在しません。")
+              .setColor("Blue"),
+          ],
+          ephemeral: true,
+        });
       }
 
-      if (
-        interaction.client.rebootFlag === 1 &&
-        !config.executable.mod.includes(interaction.user.id)
-      )
-        return interaction.error(
-          "⏲起動中",
-          "現在起動中です。\n起動完了までしばらくお待ちください…"
-        );
+      if (interaction.client.rebootFlag === 1)
+        return await interaction.reply({
+          embeds: [
+            new EmbedBuilder()
+              .setTitle("<:x_:1061166079495389196> | 失敗 - ⏲起動中")
+              .setDescription(
+                "現在起動中です。\n起動完了までしばらくお待ちください…"
+              )
+              .setColor("Blue"),
+          ],
+          ephemeral: true,
+        });
 
       if (command.guildOnly && !interaction.guild) {
-        return interaction.error(
-          "🧩サーバー専用コマンド",
-          "このコマンドはサーバー内でしか使用できません。"
-        );
-      }
-
-      if (command.permissions) {
-        const authorPerms = interaction.channel.permissionsFor(
-          interaction.user
-        );
-        if (
-          !authorPerms ||
-          !command.permissions.every((perm) =>
-            authorPerms.has(PermissionFlagsBits[perm])
-          )
-        ) {
-          return interaction.error(
-            "🧰権限不足",
-            "あなたにこのコマンドを実行する権限がありません\nこのコマンドを実行するにはあなたに`" +
-              command.permissions.join(", ") +
-              "`の権限が必要です"
-          );
-        }
-      }
-
-      if (command.modOnly) {
-        if (!config.executable.mod.includes(interaction.user.id)) {
-          return interaction.error(
-            "👮モデレーター専用コマンド",
-            "あなたはこのコマンドを実行できません"
-          );
-        }
+        return await interaction.reply({
+          embeds: [
+            new EmbedBuilder()
+              .setTitle(
+                "<:x_:1061166079495389196> | 失敗 - 🧩サーバー専用コマンド"
+              )
+              .setDescription("このコマンドはサーバー内でしか使用できません。")
+              .setColor("Blue"),
+          ],
+          ephemeral: true,
+        });
       }
 
       if (command.adminOnly) {
         if (!config.executable.admin.includes(interaction.user.id)) {
-          return interaction.error(
-            "🌟管理者専用コマンド",
-            "あなたはこのコマンドを実行できません"
-          );
+          return await interaction.reply({
+            embeds: [
+              new EmbedBuilder()
+                .setTitle(
+                  "<:x_:1061166079495389196> | 失敗 - 🌟管理者専用コマンド"
+                )
+                .setDescription("あなたはこのコマンドを実行できません")
+                .setColor("Blue"),
+            ],
+            ephemeral: true,
+          });
         }
       }
 
@@ -98,10 +95,22 @@ export default {
 
         if (now < expirationTime) {
           const timeLeft = (expirationTime - now) / 1000;
-          return interaction.error(
-            "💧コマンドクールダウン",
-            `クールダウン中です\nあと\`${timeLeft.toFixed(1)}\`秒お待ちください`
-          );
+
+          return await interaction.reply({
+            embeds: [
+              new EmbedBuilder()
+                .setTitle(
+                  "<:x_:1061166079495389196> | 失敗 - 🕑コマンドクールダウン"
+                )
+                .setDescription(
+                  `クールダウン中です\nあと\`${timeLeft.toFixed(
+                    1
+                  )}\`秒お待ちください。`
+                )
+                .setColor("Blue"),
+            ],
+            ephemeral: true,
+          });
         }
       }
 
@@ -114,42 +123,57 @@ export default {
             console.error(error);
             const errorId = SnowflakeUtil.generate();
             if (!interaction.replied && !interaction.deferred) {
-              interaction.error(
-                "❌エラー",
-                "原因不明のエラーが発生しました。\n下のエラーIDを控えて、サポートサーバーでお問い合わせください。\n\nエラーID:`" +
-                  errorId +
-                  "`\n開発者用エラーメッセージ:```js\n" +
-                  error +
-                  "\n```"
-              );
+              await interaction.reply({
+                embeds: [
+                  new EmbedBuilder()
+                    .setTitle("<:x_:1061166079495389196> | 失敗 - ❌エラー")
+                    .setDescription(
+                      "エラーが発生しました。\n下のエラーIDを控えて、サポートサーバーでお問い合わせください。\nエラーID: " +
+                        errorId +
+                        "`\n開発者用エラーメッセージ:```js\n" +
+                        error +
+                        "\n```"
+                    )
+                    .setColor("Blue"),
+                ],
+              });
             } else if (interaction.deferred) {
-              interaction.error(
-                "❌エラー",
-                "原因不明のエラーが発生しました。\n下のエラーIDを控えて、サポートサーバーでお問い合わせください。\n\nエラーID:`" +
-                  errorId +
-                  "`\n開発者用エラーメッセージ:```js\n" +
-                  error +
-                  "\n```",
-                true
-              );
+              await interaction.reply({
+                embeds: [
+                  new EmbedBuilder()
+                    .setTitle("<:x_:1061166079495389196> | 失敗 - ❌エラー")
+                    .setDescription(
+                      "エラーが発生しました。\n下のエラーIDを控えて、サポートサーバーでお問い合わせください。\nエラーID: " +
+                        errorId +
+                        "`\n開発者用エラーメッセージ:```js\n" +
+                        error +
+                        "\n```"
+                    )
+                    .setColor("Blue"),
+                ],
+              });
             } else {
-              interaction.errorUpdate(
-                "❌エラー",
-                "原因不明のエラーが発生しました。\n下のエラーIDを控えて、サポートサーバーでお問い合わせください。\n\nエラーID:`" +
-                  errorId +
-                  "`\n開発者用エラーメッセージ:```js\n" +
-                  error +
-                  "\n```"
-              );
+              await interaction.reply({
+                embeds: [
+                  new EmbedBuilder()
+                    .setTitle("<:x_:1061166079495389196> | 失敗 - ❌エラー")
+                    .setDescription(
+                      "エラーが発生しました。\n下のエラーIDを控えて、サポートサーバーでお問い合わせください。\nエラーID: " +
+                        errorId +
+                        "`\n開発者用エラーメッセージ:```js\n" +
+                        error +
+                        "\n```"
+                    )
+                    .setColor("Blue"),
+                ],
+              });
             }
             const ch = interaction.client.channels.cache.get(
               config.logChannelId
             );
             if (ch.isTextBased()) {
               await ch.send({
-                content: `${config.executable.admin
-                  .map((x) => `<@${x}>`)
-                  .join(",")}`,
+                content: `<@510590521811402752> 対応してください`,
                 embeds: [
                   {
                     title: "エラーが発生しています",
@@ -174,20 +198,24 @@ export default {
       } catch (error) {
         console.error(error);
         const errorId = SnowflakeUtil.generate();
-        interaction.error(
-          "❌エラー",
-          "原因不明のエラーが発生しました。\n下のエラーIDを控えて、サポートサーバーでお問い合わせください。\n\nエラーID:`" +
-            errorId +
-            "`\n開発者用エラーメッセージ:```js\n" +
-            error +
-            "\n```"
-        );
+        await interaction.reply({
+          embeds: [
+            new EmbedBuilder()
+              .setTitle("<:x_:1061166079495389196> | 失敗 - ❌エラー")
+              .setDescription(
+                "エラーが発生しました。開発者側のミスの可能性が高いです。\n下のエラーIDを控えて、サポートサーバーでお問い合わせください。\nエラーID: " +
+                  errorId +
+                  "`\n開発者用エラーメッセージ:```js\n" +
+                  error +
+                  "\n```"
+              )
+              .setColor("Blue"),
+          ],
+        });
         const ch = interaction.client.channels.cache.get(config.logChannelId);
         if (ch.isTextBased()) {
           await ch.send({
-            content: `${config.executable.admin
-              .map((x) => `<@${x}>`)
-              .join(",")}`,
+            content: `<@510590521811402752> 対応してください`,
             embeds: [
               {
                 title: "エラーが発生しています",

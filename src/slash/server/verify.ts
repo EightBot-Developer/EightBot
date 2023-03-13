@@ -1,75 +1,60 @@
 import {
-  CommandInteraction,
+  ChatInputCommandInteraction,
   EmbedBuilder,
   SlashCommandBuilder,
 } from "discord.js";
-import { en_us } from "../../../locales/en-US.js";
-import { ja } from "../../../locales/ja.js";
-
 export default {
   command: new SlashCommandBuilder()
     .setName("verify")
-    .setDescription(en_us.verify.description)
-    .setDescriptionLocalization("ja", ja.verify.description)
+    .setDescription("認証パネルを生成します。")
     .addStringOption((input) =>
       input
         .addChoices(
           {
-            name: en_us.verify.options[0],
-            name_localizations: { ja: ja.verify.options[0] },
+            name: "2段階認証をしているかチェック",
             value: "01",
           },
           {
-            name: en_us.verify.options[1],
-            name_localizations: { ja: ja.verify.options[1] },
+            name: "1クリック",
             value: "02",
           },
           {
-            name: en_us.verify.options[2],
-            name_localizations: { ja: ja.verify.options[2] },
+            name: "ウェブ",
             value: "03",
           },
           {
-            name: en_us.verify.options[3],
-            name_localizations: { ja: ja.verify.options[3] },
+            name: "乱数",
             value: "04",
           },
           {
-            name: en_us.verify.options[4],
-            name_localizations: { ja: ja.verify.options[4] },
+            name: "足し算",
             value: "05",
           },
           {
-            name: en_us.verify.options[5],
-            name_localizations: { ja: ja.verify.options[5] },
+            name: "引き算",
             value: "06",
           },
           {
-            name: en_us.verify.options[6],
-            name_localizations: { ja: ja.verify.options[6] },
+            name: "掛け算",
             value: "07",
           },
           {
-            name: en_us.verify.options[7],
-            name_localizations: { ja: ja.verify.options[7] },
+            name: "割り算",
             value: "08",
           },
           {
-            name: en_us.verify.options[8],
-            name_localizations: { ja: ja.verify.options[8] },
+            name: "画像",
             value: "09",
           },
           {
-            name: en_us.verify.options[9],
-            name_localizations: { ja: ja.verify.options[9] },
+            name: "テキスト",
             value: "10",
-          }
+          },
+          { name: "連携ロール認証", value: "11" }
         )
         .setRequired(true)
-        .setName(en_us.verify.optionname)
-        .setNameLocalization("ja", ja.verify.optionname)
-        .setDescription(en_us.verify.optionname)
-        .setDescriptionLocalization("ja", ja.verify.optionname)
+        .setName("認証の種類")
+        .setDescription("認証の種類")
     ),
-  async execute(i: CommandInteraction) {},
+  async execute(i: ChatInputCommandInteraction) {},
 };

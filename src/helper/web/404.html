@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/beercss@3.0.8/dist/cdn/beer.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/beercss@3.0.8/dist/cdn/beer.min.js"
+    ></script>
+    <script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>
+    <script src="https://unpkg.com/vue-router@3.6.5/dist/vue-router.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1"></script>
+    <style>
+      :root {
+        font-family: "Roboto", system-ui, sans-serif;
+      }
+
+      label {
+        display: flex;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body id="body">
+    <!-- 
+        ソースコードご確認ありがとうございます。
+        よろしければ、このウェブサイトに貢献しませんか？
+          レポジトリ: https://github.com/EightBot-Developer/EightBot
+
+        
+        このウェブサイトは、コンソールに依存関係とログ、EightBot Websiteのバージョンを表示しています。
+    　-->
+    <nav class="m l tiny-padding left">
+      <a href="/">
+        <i>home</i>
+        <span>ホーム</span>
+      </a>
+      <a href="/#/func">
+        <i>widgets</i>
+        <span>機能</span>
+      </a>
+      <a>
+        <span class="material-symbols-outlined"> dashboard </span>
+        <span>ダッシュボード</span>
+      </a>
+      <a>
+        <i>arrow_forward</i>
+        <span>Right</span>
+      </a>
+      <a onclick="theme()">
+        <i>light_mode</i>
+        <span id="light_text">ライト</span>
+      </a>
+    </nav>
+    <main class="responsive" style="margin: 0" id="app">
+      <h1>404</h1>
+      <h2>このページはありません。</h2>
+      <button class="responsive extra" onclick="location.href = '/'">
+        ホームに戻る。
+      </button>
+      <button
+        class="responsive extra"
+        style="margin-top: 1.2%"
+        onclick="history.back()"
+      >
+        前のページに戻る。
+      </button>
+    </main>
+    <nav class="s bottom">
+      <a href="/">
+        <i>home</i>
+        <span>ホーム</span>
+      </a>
+      <a href="/#/func">
+        <i>widgets</i>
+        <span>機能</span>
+      </a>
+      <a>
+        <span class="material-symbols-outlined"> dashboard </span>
+        <span>ダッシュボード</span>
+      </a>
+      <a>
+        <i>arrow_forward</i>
+        <span>Right</span>
+      </a>
+      <a onclick="theme()">
+        <i>light_mode</i>
+        <span id="light_text2">ライト</span>
+      </a>
+    </nav>
+    <script>
+      console.log(
+        "EightBot Website v3.0.0\n\n\n===依存関係===\n\nbeercss v3.0.8\nvue v2.7.14\nvue-router v3.6.5\nhttp-vue-loader v1.4.2\njs-cookie v3.0.1\n\n======ログ======\n\n"
+      );
+      function theme() {
+        if (Cookies.get("theme") === "dark") {
+          document.getElementById("light_text").innerText = "ダーク";
+          document.getElementById("light_text2").innerText = "ダーク";
+          console.log("light modeに切り替えました。");
+          Cookies.set("theme", "light");
+          document.getElementById("body").setAttribute("class", "light");
+        } else {
+          if (Cookies.get("theme") === "light") {
+            document.getElementById("light_text").innerText = "ライト";
+            document.getElementById("light_text2").innerText = "ライト";
+            console.log("dark modeに切り替えました。");
+            Cookies.set("theme", "dark");
+            document.getElementById("body").setAttribute("class", "dark");
+          }
+        }
+      }
+      const darkModeMediaQuery = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      );
+      const isDarkMode = darkModeMediaQuery.matches;
+      if (Cookies.get("theme")) {
+        if (Cookies.get("theme") === "dark") {
+          document.getElementById("light_text").innerText = "ライト";
+          document.getElementById("light_text2").innerText = "ライト";
+          console.log("dark modeに切り替えました。");
+          document.getElementById("body").setAttribute("class", "dark");
+        } else {
+          if (Cookies.get("theme") === "light") {
+            document.getElementById("light_text").innerText = "ダーク";
+            document.getElementById("light_text2").innerText = "ダーク";
+            document.getElementById("body").setAttribute("class", "light");
+            console.log("light modeに切り替えました。");
+          }
+        }
+      } else {
+        if (isDarkMode) {
+          document.getElementById("body").setAttribute("class", "dark");
+          console.log("dark modeに切り替えました。");
+          Cookies.set("theme", "dark");
+        } else {
+          document.getElementById("body").setAttribute("class", "light");
+          console.log("light modeに切り替えました。");
+          Cookies.set("theme", "light");
+        }
+      }
+    </script>
+  </body>
+</html>

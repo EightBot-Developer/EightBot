@@ -1,71 +1,99 @@
 import {
   ChatInputCommandInteraction,
   EmbedBuilder,
+  PermissionFlagsBits,
   SlashCommandBuilder,
 } from "discord.js";
-import { en_us } from "../../../locales/en-US.js";
-import { ja } from "../../../locales/ja.js";
 import Keyv from "keyv";
 const db = new Keyv("sqlite://db/globalchat.sqlite", { table: "channels" });
 export default {
   command: new SlashCommandBuilder()
     .setName("globalchat")
-    .setDescription(en_us.globalchat.description)
-    .setDescriptionLocalizations({
-      "en-US": en_us.globalchat.description,
-      ja: ja.globalchat.description,
-    }),
+    .setDescription("グローバルチャット系コマンド。")
+    .addSubcommand((input) =>
+      input.setName("join").setDescription("グローバルチャットに入室します。")
+    )
+    .addSubcommand((input) =>
+      input
+        .setName("leave")
+        .setDescription("グローバルチャットから退出します。")
+    ),
   async execute(i: ChatInputCommandInteraction) {
-    const channels: Array<String> = await db.get("channels");
-    let found: boolean = false;
-    channels.forEach((value) => {
-      if (value === i.channelId) {
-        found = true;
-      }
-    });
-    if (found) {
-      const index = channels.indexOf(i.channelId);
-      channels.splice(index, 1);
-      await db
-        .set("list", channels)
-        .then(async () => {
-          if (!i.replied) {
-            await i.reply({
-              embeds: [
-                new EmbedBuilder()
-                  .setTitle("✅｜成功")
-                  .setDescription("退室に成功しました。"),
-              ],
-            });
-          } else {
-            await i.followUp({
-              embeds: [
-                new EmbedBuilder()
-                  .setTitle("✅｜成功")
-                  .setDescription("退室に成功しました。"),
-              ],
-            });
-          }
-        })
-        .catch(async () => {
-          if (!i.replied) {
-            await i.reply({
-              embeds: [
-                new EmbedBuilder()
-                  .setTitle("❌｜失敗")
-                  .setDescription("退室に失敗しました。"),
-              ],
-            });
-          } else {
-            await i.followUp({
-              embeds: [
-                new EmbedBuilder()
-                  .setTitle("❌｜失敗")
-                  .setDescription("退室に失敗しました。"),
-              ],
-            });
+    if (
+      !i.guild.members.cache
+        .get(i.user.id)
+        .permissions.has(PermissionFlagsBits.ManageChannels)
+    )
+      return await i.reply({
+        embeds: [
+          new EmbedBuilder()
+            .setTitle("<:x_:1061166079495389196> | 失敗")
+            .setDescription(
+              "あなたにこのチャンネルを管理する権限がありません。"
+            )
+            .setColor("Blue"),
+        ],
+      });
+    if (
+      !i.guild.members.cache
+        .get(i.client.user.id)
+        .permissions.has(PermissionFlagsBits.ManageWebhooks) ||
+      !i.guild.members.cache
+        .get(i.client.user.id)
+        .permissions.has(PermissionFlagsBits.AddReactions) ||
+      !i.guild.members.cache
+        .get(i.client.user.id)
+        .permissions.has(PermissionFlagsBits.ViewChannel) ||
+      !i.guild.members.cache
+        .get(i.client.user.id)
+        .permissions.has(PermissionFlagsBits.SendMessages) ||
+      !i.guild.members.cache
+        .get(i.client.user.id)
+        .permissions.has(PermissionFlagsBits.ManageChannels)
+    )
+      return await i.reply({
+        embeds: [
+          new EmbedBuilder()
+            .setTitle("<:x_:1061166079495389196> | 失敗")
+            .setDescription(
+              "Botにウェブフックの管理又はリアクションの追加又はチャンネルの閲覧又はメッセージの送信又はチャンネル管理権限がありません。"
+            )
+            .setColor("Blue"),
+        ],
+      });
+    switch (i.options.getSubcommand()) {
+      case "join":
+        const channels: Array<String> = await db.get("channels");
+        let found: boolean = false;
+        channels.forEach((value) => {
+          if (value === i.channelId) {
+            found = true;
           }
         });
+        if (found) {
+          await i.reply({
+            embeds: [
+              new EmbedBuilder()
+                .setTitle("<:x_:1061166079495389196> | 失敗")
+                .setDescription("すでに入室済みです。")
+                .setColor("Blue"),
+            ],
+          });
+        } else {
+          await db.set(i.channelId, true);
+          await i.reply({
+            embeds: [
+              new EmbedBuilder()
+                .setTitle("<:check:1061166073891786872> | 成功")
+                .setDescription("入室しました。")
+                .setColor("Blue"),
+            ],
+          });
+        }
+        break;
+
+      default:
+        break;
     }
   },
 };
