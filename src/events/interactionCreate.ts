@@ -4,7 +4,6 @@ import {
   Collection,
   Events,
   SnowflakeUtil,
-  PermissionFlagsBits,
   EmbedBuilder,
   BaseInteraction,
 } from "discord.js";

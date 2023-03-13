@@ -61,16 +61,16 @@ export default {
             .setColor("Blue"),
         ],
       });
+    const channels: Array<string> = await db.get("channels");
+    let foundJoin = false;
     switch (i.options.getSubcommand()) {
       case "join":
-        const channels: Array<string> = await db.get("channels");
-        let found = false;
         channels.forEach((value) => {
           if (value === i.channelId) {
-            found = true;
+            foundJoin = true;
           }
         });
-        if (found) {
+        if (foundJoin) {
           await i.reply({
             embeds: [
               new EmbedBuilder()

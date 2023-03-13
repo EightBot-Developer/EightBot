@@ -1,17 +1,6 @@
-import {
-  Client,
-  ActivityType,
-  Events,
-  SlashCommandBuilder,
-  ContextMenuCommandBuilder,
-  REST,
-  Routes,
-} from "discord.js";
-import config from "../config.js";
-/**
- * @param {number} ms
- */
-async function sleep(ms) {
+import { Client, ActivityType, Events } from "discord.js";
+
+async function sleep(ms: number) {
   return new Promise((r) => setTimeout(r, ms));
 }
 

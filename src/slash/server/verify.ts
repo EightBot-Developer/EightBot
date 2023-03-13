@@ -1,8 +1,4 @@
-import {
-  ChatInputCommandInteraction,
-  EmbedBuilder,
-  SlashCommandBuilder,
-} from "discord.js";
+import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 export default {
   command: new SlashCommandBuilder()
     .setName("verify")
@@ -56,5 +52,7 @@ export default {
         .setName("認証の種類")
         .setDescription("認証の種類")
     ),
-  async execute(i: ChatInputCommandInteraction) {},
+  async execute(i: ChatInputCommandInteraction) {
+    await i.reply({ content: "現在使用できません。", ephemeral: true });
+  },
 };

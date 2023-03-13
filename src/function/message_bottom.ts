@@ -1,10 +1,4 @@
-import {
-  Message,
-  WebhookClient,
-  BaseInteraction,
-  EmbedBuilder,
-  PermissionFlagsBits,
-} from "discord.js";
+import { Message, WebhookClient } from "discord.js";
 import Keyv from "keyv";
 const db = new Keyv("sqlite://db/message_bottom.sqlite", { table: "chid_mid" });
 const db2 = new Keyv("sqlite://db/message_bottom.sqlite", { table: "mid" });

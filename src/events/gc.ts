@@ -7,7 +7,7 @@ export default {
   name: Events.MessageCreate,
   async execute(message: Message) {
     if (await db.get(message.channelId)) {
-      const channels: Array<string> = await db.get("channels");
+      // const channels: Array<string> = await db.get("channels");
     }
   },
 };

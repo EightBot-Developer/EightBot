@@ -3,12 +3,6 @@ import { Events } from "discord.js";
 import { timeToJSTTimestamp, timeToJST } from "../util/function.js";
 import { appendFile, writeFile } from "node:fs";
 
-/**
- * @param {number} ms
- */
-async function sleep(ms) {
-  return new Promise((r) => setTimeout(r, ms));
-}
 let debug_file = false;
 let time = null;
 export default {

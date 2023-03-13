@@ -1,4 +1,4 @@
-import { ActionRowBuilder, StringSelectMenuBuilder } from "discord.js";
+/* eslint-disable no-case-declarations */
 import { time } from "discord.js";
 import {
   ChatInputCommandInteraction,
