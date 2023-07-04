@@ -1,4 +1,5 @@
 <div align="center">
+<h1><a href="https://github.com/aqued-dev/aqued">v3の開発はこちらで行われています(名前変更)</a></h1>
 <h1>EightBot</h1>
 
 [![License](https://img.shields.io/github/license/EightBot-Developer/EightBot)](https://github.com/EightBot-Developer/EightBot/blob/main/LICENSE.md)
